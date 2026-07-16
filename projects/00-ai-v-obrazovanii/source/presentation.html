@@ -1,0 +1,3917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>ИИ в сфере образования — защита</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ======================================================================
+   ИИ в сфере образования — стили презентации
+   Шрифты: IBM Plex Sans (основной), IBM Plex Mono (цифры/подписи)
+   Цвета: фон #F7F7F5, текст #1A1A1A, акцент #D97757
+   ====================================================================== */
+
+:root {
+  --bg:       #F7F7F5;
+  --fg:       #1A1A1A;
+  --fg-2:     #4A4A48;
+  --fg-3:     #8A8A86;
+  --rule:     #D9D9D5;
+  --rule-2:   #E8E8E4;
+  --accent:   #D97757;
+}
+
+html, body { margin: 0; padding: 0; background: var(--bg); }
+body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; color: var(--fg); }
+
+deck-stage { background: var(--bg); }
+
+/* ---------- БАЗОВЫЙ СЛАЙД ---------- */
+deck-stage > section {
+  background: var(--bg);
+  color: var(--fg);
+  width: 1920px; height: 1080px;
+  box-sizing: border-box;
+  padding: 80px 140px 80px 140px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- ЗАГОЛОВОЧНАЯ И НИЖНЯЯ ПОЛОСА ---------- */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 28px;
+}
+.head .h-l { display: flex; gap: 24px; }
+.head .h-r { color: var(--fg-3); }
+
+.foot {
+  position: absolute;
+  bottom: 48px;
+  left: 140px;
+  right: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  color: var(--fg-3);
+}
+.foot .f-l { text-transform: uppercase; }
+
+.rule { height: 1px; background: var(--rule); margin-bottom: 80px; }
+.rule-thin { height: 1px; background: var(--rule); }
+
+/* ---------- ТИТУЛЬНЫЙ СЛАЙД ---------- */
+.title-slide { padding-top: 80px; padding-bottom: 80px; }
+.title-slide .meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.title-slide h1 {
+  font-size: 144px;
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin: 0;
+  margin-top: auto;
+  margin-bottom: 56px;
+  max-width: 1500px;
+}
+.title-slide h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.title-slide .author-block {
+  display: flex;
+  gap: 120px;
+  align-items: flex-start;
+  border-top: 1px solid var(--rule);
+  padding-top: 32px;
+}
+.title-slide .author-block .col-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 18px;
+}
+.title-slide .author-block .col-val {
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--fg);
+  line-height: 1.3;
+}
+
+/* ---------- РАЗДЕЛИТЕЛЬ ГЛАВ ---------- */
+.divider {
+  background: var(--bg);
+  padding: 80px 140px;
+  justify-content: flex-end;
+}
+.divider .d-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 20px;
+}
+.divider .d-num {
+  font-size: 640px;
+  font-weight: 300;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+  margin-bottom: 60px;
+}
+.divider .d-title {
+  font-size: 88px;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  max-width: 1400px;
+  border-top: 1px solid var(--rule);
+  padding-top: 56px;
+}
+
+/* ---------- ПОДРАЗДЕЛ (1.1, 1.2 ...) ---------- */
+.subsection .sub-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 32px;
+  margin-top: auto;
+}
+.subsection .sub-title {
+  font-size: 120px;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  max-width: 1500px;
+  margin-bottom: 80px;
+}
+
+/* ---------- ОБЫЧНЫЙ СЛАЙД С ЗАГОЛОВКОМ И ТЕКСТОМ ---------- */
+.slide-h2 {
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  margin-bottom: 56px;
+  max-width: 1500px;
+  color: var(--fg);
+}
+
+.slide-h2.tight { margin-bottom: 32px; }
+
+.body {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--fg);
+  max-width: 1300px;
+}
+.body p { margin: 0; margin-bottom: 24px; }
+.body p:last-child { margin-bottom: 0; }
+.body strong { font-weight: 500; }
+
+.body-lg {
+  font-size: 40px;
+  line-height: 1.3;
+  font-weight: 400;
+  max-width: 1500px;
+  color: var(--fg);
+}
+.body-lg p { margin: 0 0 28px 0; }
+.body-lg p:last-child { margin-bottom: 0; }
+.body-lg strong { font-weight: 500; }
+
+.body-sm {
+  font-size: 26px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 1300px;
+}
+.body-sm p { margin: 0 0 18px 0; }
+.body-sm p:last-child { margin-bottom: 0; }
+
+.accent { color: var(--accent); }
+.muted { color: var(--fg-3); }
+.fg2 { color: var(--fg-2); }
+
+/* ---------- БОЛЬШИЕ ЦИФРЫ ---------- */
+.bignum-slide { justify-content: flex-start; }
+
+.bignum {
+  font-size: 440px;
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+  margin: 24px 0 56px 0;
+}
+.bignum.medium { font-size: 320px; }
+.bignum.small { font-size: 240px; }
+
+.bignum-cap-top {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 18px;
+}
+.bignum-cap-bot {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.32;
+  color: var(--fg);
+  max-width: 1300px;
+  border-top: 1px solid var(--rule);
+  padding-top: 32px;
+}
+.bignum-cap-bot.no-rule { border-top: none; padding-top: 0; }
+.bignum-cap-bot .src {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  display: block;
+  margin-top: 24px;
+}
+
+/* ---------- ЦИТАТА ---------- */
+.quote-slide { justify-content: center; padding-top: 160px; }
+.quote-mark {
+  font-size: 200px;
+  font-weight: 300;
+  line-height: 0.6;
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-family: 'IBM Plex Serif', serif;
+}
+.quote-text {
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  max-width: 1500px;
+  color: var(--fg);
+  margin-bottom: 56px;
+}
+.quote-attr {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* ---------- СПИСКИ-ПУНКТЫ ---------- */
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 1500px;
+}
+.steps li {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.steps li:last-child { border-bottom: 1px solid var(--rule); }
+.steps .idx {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  padding-top: 6px;
+}
+.steps .txt {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.32;
+  color: var(--fg);
+}
+
+/* ---------- ДВА СТОЛБЦА (СРАВНЕНИЯ) ---------- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1640px;
+}
+.two-col .col-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.two-col .col-h {
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  margin-bottom: 28px;
+}
+.two-col .col-b {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--fg-2);
+}
+
+/* ---------- ВЕРТИКАЛЬНЫЕ ПАРЫ ЦИФР ---------- */
+.num-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  max-width: 1640px;
+  align-items: end;
+  margin-bottom: 60px;
+}
+.num-pair .n {
+  font-size: 280px;
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.num-pair .n.hi { color: var(--accent); }
+.num-pair .lab {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-top: 24px;
+}
+
+/* ---------- СЕТКА КВАДРАНТОВ ---------- */
+.quadrant-wrap {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  grid-template-rows: 1fr 110px;
+  gap: 0;
+  width: 100%;
+  height: 760px;
+  margin-top: 16px;
+}
+.q-y-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px 0;
+  position: relative;
+}
+.q-y-label .y-top,
+.q-y-label .y-bot {
+  position: absolute;
+}
+.q-y-label .y-top { top: 0; }
+.q-y-label .y-bot { bottom: 0; }
+.q-y-label .y-mid {
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+.q-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 1px solid var(--fg);
+  position: relative;
+}
+.q-cell {
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.q-cell + .q-cell:nth-child(2),
+.q-cell:nth-child(2),
+.q-cell:nth-child(4) {
+  border-left: 1px solid var(--fg);
+}
+.q-cell:nth-child(3),
+.q-cell:nth-child(4) {
+  border-top: 1px solid var(--fg);
+}
+.q-cell .q-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--fg-3);
+}
+.q-cell .q-name {
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin-top: 8px;
+}
+.q-cell .q-desc {
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--fg-2);
+  margin-top: 24px;
+  font-weight: 400;
+}
+.q-cell.q4 {
+  background: rgba(217, 119, 87, 0.07);
+}
+.q-cell.q4 .q-name { color: var(--accent); }
+
+.q-x-spacer { }
+.q-x-label {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  padding: 12px 0;
+  position: relative;
+}
+.q-x-label .x-mid {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+/* ---------- ОДИНОЧНЫЙ КВАДРАНТ-СЛАЙД ---------- */
+.q-single .q-axes {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 32px;
+}
+.q-single .q-axes .ax-val { color: var(--fg); }
+.q-single h2 {
+  font-size: 96px;
+  font-weight: 500;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px 0;
+  color: var(--fg);
+}
+.q-single h2 .q-id {
+  display: inline-block;
+  color: var(--accent);
+  margin-right: 28px;
+  font-weight: 400;
+}
+.q-single .q-sub {
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--fg-2);
+  max-width: 1400px;
+  margin-bottom: 56px;
+}
+.q-single .q-body {
+  font-size: 30px;
+  line-height: 1.45;
+  max-width: 1400px;
+  color: var(--fg);
+}
+.q-single .q-body p { margin: 0 0 24px 0; }
+.q-single .q-body p:last-child { margin-bottom: 0; }
+.q-single .q-empirics {
+  margin-top: auto;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* ---------- ИСТОЧНИК (источник на слайде) ---------- */
+.src-block {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 28px;
+}
+.src-block .src-name { color: var(--fg); font-weight: 500; }
+
+/* ---------- TOC ---------- */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.toc-list li {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 32px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.toc-list li:last-child { border-bottom: 1px solid var(--rule); }
+.toc-list li.sub {
+  padding-left: 100px;
+  font-size: 26px;
+  color: var(--fg-2);
+  border-top: 1px solid var(--rule-2);
+}
+.toc-list li.sub .num { font-size: 22px; color: var(--fg-3); }
+.toc-list .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+.toc-list .title {
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+.toc-list li.sub .title { font-size: 26px; font-weight: 400; color: var(--fg-2); }
+.toc-list .pg {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  color: var(--fg-3);
+}
+
+/* ---------- ФИНАЛЬНЫЙ СЛАЙД ---------- */
+.final-slide {
+  justify-content: center;
+  align-items: flex-start;
+}
+.final-slide .thanks {
+  font-size: 144px;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  margin-bottom: 80px;
+}
+.final-slide .thanks em { font-style: normal; color: var(--accent); }
+.final-slide .sig {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* ---------- УТИЛИТЫ ---------- */
+.spacer { flex: 1; }
+.gap-sm { height: 24px; }
+.gap-md { height: 48px; }
+.gap-lg { height: 80px; }
+
+.row-flex { display: flex; gap: 24px; align-items: baseline; }
+.col-flex { display: flex; flex-direction: column; }
+
+.kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 24px;
+}
+.kicker.accent { color: var(--accent); }
+
+.tagged-fact {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.tagged-fact:last-child { border-bottom: 1px solid var(--rule); }
+.tagged-fact .tf-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+.tagged-fact .tf-txt {
+  font-size: 28px;
+  line-height: 1.35;
+  color: var(--fg);
+}
+
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 8px 0 8px 36px;
+  margin: 24px 0;
+}
+.callout p { margin: 0; }
+
+/* ---------- ОСИ ВЫВОДА — ВЫВОДЫ ---------- */
+.conclusion-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+.conclusion-h {
+  font-size: 84px;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin-bottom: 48px;
+  max-width: 1500px;
+}
+
+</style>
+<style>deck-stage:not(:defined){visibility:hidden}</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ==================================================================
+     00 · ТИТУЛЬНЫЙ
+     ================================================================== -->
+<section class="title-slide" data-label="Титул">
+  <div class="meta">Индивидуальный проект · Информатика · 2026</div>
+  <h1>ИИ в&nbsp;сфере<br><em>образования</em></h1>
+  <div class="author-block">
+    <div>
+      <div class="col-label">Автор</div>
+      <div class="col-val">XXXXXXX<br>10 класс</div>
+    </div>
+    <div>
+      <div class="col-label">Руководитель</div>
+      <div class="col-val">XXXXXXX<br>учитель информатики</div>
+    </div>
+    <div>
+      <div class="col-label">Школа</div>
+      <div class="col-val">XXXXXXX<br>XXXXXXX</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================
+     СОДЕРЖАНИЕ
+     ================================================================== -->
+<section data-label="Содержание">
+  <div class="head"><div class="h-l"><span>Содержание</span></div><div class="h-r">Защита</div></div>
+  <div class="rule"></div>
+  <ul class="toc-list">
+    <li><span class="num">00</span><span class="title">Введение</span><span class="pg">гипотеза · цель · задачи</span></li>
+    <li><span class="num">01</span><span class="title">Теоретические основы исследования</span><span class="pg">глава I</span></li>
+    <li class="sub"><span class="num">1.1</span><span class="title">Восприятие ИИ в образовательном сообществе</span><span class="pg"></span></li>
+    <li class="sub"><span class="num">1.2</span><span class="title">Реальные практики использования: типология режимов</span><span class="pg"></span></li>
+    <li class="sub"><span class="num">1.3</span><span class="title">Теоретическая рамка: когнитивная нагрузка и мотивация</span><span class="pg"></span></li>
+    <li><span class="num">02</span><span class="title">Эмпирический анализ</span><span class="pg">глава II</span></li>
+    <li class="sub"><span class="num">2.1</span><span class="title">Динамика академической нечестности до и после ChatGPT</span><span class="pg"></span></li>
+    <li class="sub"><span class="num">2.2</span><span class="title">Мотивация и режим использования ИИ</span><span class="pg"></span></li>
+    <li class="sub"><span class="num">2.3</span><span class="title">Разные эффекты ИИ на учебные результаты</span><span class="pg"></span></li>
+    <li class="sub"><span class="num">2.4</span><span class="title">Сетка четырёх режимов</span><span class="pg"></span></li>
+    <li><span class="num">03</span><span class="title">Заключение</span><span class="pg">выводы</span></li>
+  </ul>
+</section>
+
+<!-- ==================================================================
+     00 · РАЗДЕЛИТЕЛЬ — ВВЕДЕНИЕ
+     ================================================================== -->
+<section class="divider" data-label="00 Введение">
+  <div class="d-label">Часть нулевая</div>
+  <div class="d-num">00</div>
+  <div class="d-title">Введение</div>
+</section>
+
+<!-- ============ Введение: контекст ============ -->
+<section data-label="Контекст 2022">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Конец 2022 года</div>
+  <h2 class="slide-h2">ChatGPT в&nbsp;открытом доступе.</h2>
+  <p class="body-lg">Для системы образования — событие того же порядка, что и приход интернета двумя десятилетиями раньше.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">04</div></div>
+</section>
+
+<section data-label="Тон обсуждения">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Тон обсуждения</div>
+  <h2 class="slide-h2">С&nbsp;самого начала&nbsp;— тревожный.</h2>
+  <p class="body-lg">Главным предметом беспокойства оказалось <strong>списывание</strong>. ChatGPT воспринимался прежде всего как удобный способ обойти учебное задание.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">05</div></div>
+</section>
+
+<section data-label="Но эмпирика">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Но в&nbsp;это же время</div>
+  <h2 class="slide-h2">Эмпирические работы рисуют&nbsp;<span class="accent">другую картину</span>.</h2>
+  <p class="body-lg">Реальное использование ИИ в&nbsp;учёбе устроено сложнее, чем простое противопоставление «списывание против учёбы».</p>
+  <p class="body-lg fg2">Итоговое влияние ИИ на&nbsp;успеваемость определяется не&nbsp;самим инструментом, а&nbsp;тем, кто и&nbsp;как им пользуется.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">06</div></div>
+</section>
+
+<section data-label="Проблемное поле">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Расхождение между общественным представлением и&nbsp;эмпирической картиной&nbsp;— <span class="accent">проблемное поле работы</span>.</h2>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">07</div></div>
+</section>
+
+<!-- ============ Объект ============ -->
+<section data-label="Объект">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Объект исследования</div>
+  <p class="body-lg">Использование генеративных нейросетей в&nbsp;учебной деятельности школьников и&nbsp;студентов.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">08</div></div>
+</section>
+
+<!-- ============ Предмет ============ -->
+<section data-label="Предмет">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Предмет исследования</div>
+  <p class="body-lg">Связь между способом использования ИИ, мотивацией учащегося и&nbsp;его учебными результатами&nbsp;— с&nbsp;особым вниманием к&nbsp;вопросу о&nbsp;действительной, а&nbsp;не&nbsp;предполагаемой роли ИИ в&nbsp;академической нечестности.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">09</div></div>
+</section>
+
+<!-- ============ Цель ============ -->
+<section data-label="Цель">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Цель работы</div>
+  <p class="body-lg">Проверить, насколько распространённое в&nbsp;обществе представление о&nbsp;генеративном ИИ как преимущественно об&nbsp;инструменте обхода учебных заданий соответствует фактическому положению дел&nbsp;— и&nbsp;описать действительные режимы его использования учащимися в&nbsp;опоре на&nbsp;международные эмпирические исследования.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">10</div></div>
+</section>
+
+<!-- ============ Гипотеза (полная) ============ -->
+<section data-label="Гипотеза">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Гипотеза исследования</div>
+  <p class="body">Эффект влияния искусственного интеллекта на&nbsp;учебные результаты <strong>неоднороден</strong> и&nbsp;определяется не&nbsp;самим инструментом, а&nbsp;двумя обстоятельствами&nbsp;— мотивационной ориентацией ученика по&nbsp;отношению к&nbsp;конкретному предмету (направленностью на&nbsp;его понимание или на&nbsp;формальный результат по&nbsp;нему) и&nbsp;устройством учебной задачи, поощряющим тот или иной режим работы с&nbsp;ИИ.</p>
+  <div class="callout">
+    <p class="body" style="font-size:30px">Распространённое представление, согласно которому ИИ&nbsp;— это прежде всего инструмент академической нечестности, <strong>эмпирически не&nbsp;подтверждается</strong>.</p>
+  </div>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">11</div></div>
+</section>
+
+<!-- ============ Задачи ============ -->
+<section data-label="Задачи">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Задачи</h2>
+  <ul class="steps">
+    <li><span class="idx">01</span><span class="txt">Охарактеризовать существующее восприятие искусственного интеллекта в&nbsp;образовательном сообществе</span></li>
+    <li><span class="idx">02</span><span class="txt">Систематизировать практики его использования учащимися на&nbsp;основании опросных данных</span></li>
+    <li><span class="idx">03</span><span class="txt">Проанализировать динамику академической нечестности до&nbsp;и&nbsp;после появления ChatGPT</span></li>
+    <li><span class="idx">04</span><span class="txt">Рассмотреть связь между мотивационной ориентацией ученика и&nbsp;режимом использования ИИ</span></li>
+    <li><span class="idx">05</span><span class="txt">Построить классификацию режимов, учитывающую различия между учениками и&nbsp;предметами</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">12</div></div>
+</section>
+
+<!-- ============ Методология ============ -->
+<section data-label="Методология">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Методология</div>
+  <p class="body-lg">Анализ международных научных публикаций и&nbsp;институциональных отчётов 2022–2026&nbsp;годов&nbsp;— из&nbsp;рецензируемых журналов и&nbsp;под эгидой авторитетных исследовательских центров.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">13</div></div>
+</section>
+
+<!-- ============ География ============ -->
+<section data-label="География">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Географические рамки</div>
+  <h2 class="slide-h2 tight">США&nbsp;· Великобритания&nbsp;·<br>Западная Европа&nbsp;· Австралия</h2>
+  <p class="body-sm">Те образовательные системы, по&nbsp;которым имеется достаточное количество доброкачественных эмпирических данных и&nbsp;в&nbsp;которых доступ учащихся к&nbsp;ИИ не&nbsp;затруднён техническими барьерами, способными исказить выборку.</p>
+  <div class="gap-md"></div>
+  <p class="body-sm">Российский и&nbsp;постсоветский контекст из&nbsp;рассмотрения сознательно исключён: ограниченный официальный доступ к&nbsp;большинству генеративных моделей делает их&nbsp;пользователей нерепрезентативной&nbsp;— технически подкованной и&nbsp;особо мотивированной&nbsp;— частью школьной выборки.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">14</div></div>
+</section>
+
+<!-- ============ Методологическая оговорка ============ -->
+<section data-label="Оговорка ИИ">
+  <div class="head"><div class="h-l"><span>00 · Введение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Методологическая оговорка</div>
+  <h2 class="slide-h2 tight">Работа подготовлена с&nbsp;использованием больших языковых моделей.</h2>
+  <p class="body">Учитывая, что предметом самой работы является сложившаяся практика использования ИИ учащимися, обращение к&nbsp;нейросетям при&nbsp;её подготовке методологически уместно.</p>
+  <p class="body fg2">Содержательные решения, отбор источников и&nbsp;их&nbsp;интерпретация принадлежат автору.</p>
+  <div class="foot"><div class="f-l">00 · Введение</div><div class="f-r">15</div></div>
+</section>
+
+<!-- ==================================================================
+     01 · РАЗДЕЛИТЕЛЬ — ТЕОРЕТИЧЕСКИЕ ОСНОВЫ
+     ================================================================== -->
+<section class="divider" data-label="01 Теория">
+  <div class="d-label">Часть первая</div>
+  <div class="d-num">01</div>
+  <div class="d-title">Теоретические основы<br>исследования</div>
+</section>
+
+<!-- ==================================================================
+     1.1 — ВОСПРИЯТИЕ
+     ================================================================== -->
+<section class="subsection" data-label="1.1 Восприятие">
+  <div class="head"><div class="h-l"><span>01 · Теория</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">1.1</div>
+  <div class="sub-title">Восприятие ИИ в&nbsp;образовательном сообществе</div>
+  <div class="foot"><div class="f-l">01 · Теория</div><div class="f-r">17</div></div>
+</section>
+
+<section data-label="Зафиксировать восприятие">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Прежде чем говорить о&nbsp;расхождении, нужно зафиксировать <span class="accent">само восприятие</span>.</h2>
+  <p class="body fg2">То, против чего, по&nbsp;существу, направлена настоящая работа.</p>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">18</div></div>
+</section>
+
+<section data-label="WFF источник">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Walton Family Foundation × Impact Research</span> · США</div>
+  <h2 class="slide-h2 tight">Февраль 2023&nbsp;— через три месяца после публичного запуска ChatGPT.</h2>
+  <div class="row-flex" style="margin-top:48px; gap:120px">
+    <div>
+      <div class="kicker">Учителя</div>
+      <div style="font-size:120px; font-weight:300; line-height:1; letter-spacing:-0.03em;">1&nbsp;002</div>
+    </div>
+    <div>
+      <div class="kicker">Школьники 12–17</div>
+      <div style="font-size:120px; font-weight:300; line-height:1; letter-spacing:-0.03em;">1&nbsp;000</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">19</div></div>
+</section>
+
+<section class="bignum-slide" data-label="24% учителей">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Февраль 2023 · на&nbsp;пике публичной паники</div>
+  <div class="bignum">24%</div>
+  <div class="bignum-cap-bot">опрошенных учителей считали, что ChatGPT будет использоваться школьниками <strong>исключительно для&nbsp;списывания</strong>.<span class="src">Walton Family Foundation · 2023</span></div>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">20</div></div>
+</section>
+
+<section class="bignum-slide" data-label="23% июль">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Июль 2023 · через полгода</div>
+  <div class="bignum">23%</div>
+  <div class="bignum-cap-bot">Доля упала.<br>Тренд&nbsp;— вниз.</div>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">21</div></div>
+</section>
+
+<section class="bignum-slide" data-label="80% позитив">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Май 2024</div>
+  <div class="bignum">&gt;&nbsp;80%</div>
+  <div class="bignum-cap-bot">представителей каждой из&nbsp;обследованных групп&nbsp;— учителей, родителей, школьников, студентов&nbsp;— оценивали влияние ИИ на&nbsp;образование как <strong>скорее положительное</strong>.<span class="src">Walton Family Foundation · 2024</span></div>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">22</div></div>
+</section>
+
+<section data-label="Вывод WFF">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Взгляд на&nbsp;ИИ как на&nbsp;«инструмент списывания» <span class="accent">никогда не&nbsp;был мнением большинства практиков</span>.</h2>
+  <p class="body fg2">Даже на&nbsp;пике медийной паники. За&nbsp;полтора года эта доля только сжималась&nbsp;— тогда как обиходный нарратив сохранял ту&nbsp;же тревожную рамку почти без&nbsp;изменений.</p>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">23</div></div>
+</section>
+
+<section data-label="EdWeek">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">EdWeek Research Center</span> · США · 2023–2025</div>
+  <h2 class="slide-h2 tight">Учителя проходят обучение и&nbsp;осваивают инструмент.</h2>
+  <div class="num-pair">
+    <div>
+      <div class="n">29%</div>
+      <div class="lab">Весна 2024 — прошли обучение по&nbsp;ИИ</div>
+    </div>
+    <div>
+      <div class="n hi">43%</div>
+      <div class="lab">Осень 2024 — прошли обучение</div>
+    </div>
+  </div>
+  <p class="body-sm">К&nbsp;2025 году <strong style="color:var(--fg)">61%</strong> учителей подтверждали ту&nbsp;или иную форму использования ИИ в&nbsp;работе.</p>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">24</div></div>
+</section>
+
+<section data-label="RAND">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">RAND Corporation</span> · опрос районных руководителей школ</div>
+  <h2 class="slide-h2 tight">Начальное сопротивление педагогов строилось на&nbsp;риторике «ИИ как угроза списыванию».</h2>
+  <p class="body">Но эта риторика <strong>смягчалась</strong> по&nbsp;мере профессионального обучения.</p>
+  <p class="body fg2">Одной из&nbsp;заявленных целей программ переподготовки выступал именно отход от&nbsp;такого восприятия.</p>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">25</div></div>
+</section>
+
+<section data-label="Pew родители">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Pew Research Center</span> · 2025 · 1&nbsp;458 американских родителей подростков</div>
+  <h2 class="slide-h2">Систематический разрыв между восприятием родителей и&nbsp;<span class="accent">реальным поведением их&nbsp;детей</span>.</h2>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">26</div></div>
+</section>
+
+<section class="bignum-slide" data-label="50% vs 64%">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Один и&nbsp;тот же факт — пользуется ли ребёнок чат-ботом</div>
+  <div class="num-pair" style="margin-top:24px">
+    <div>
+      <div class="n">50%</div>
+      <div class="lab">Родители подтверждают</div>
+    </div>
+    <div>
+      <div class="n hi">64%</div>
+      <div class="lab">Сами подростки сообщают</div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:48px">Разрыв в&nbsp;14&nbsp;процентных пунктов. Взрослые судят о&nbsp;практике использования ИИ не&nbsp;по&nbsp;непосредственному наблюдению, а&nbsp;через медийный фильтр.</p>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">27</div></div>
+</section>
+
+<section data-label="Вывод 1.1">
+  <div class="head"><div class="h-l"><span>1.1 · Восприятие</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Вывод 1.1</div>
+  <h2 class="slide-h2 tight">Тревожная рамка функционирует в&nbsp;публичной риторике&nbsp;— но&nbsp;не&nbsp;среди тех, кто работает с&nbsp;инструментом изнутри.</h2>
+  <p class="body fg2">Учителя в&nbsp;массе своей этой рамки не&nbsp;разделяют. Программы переподготовки работают на&nbsp;отход от&nbsp;неё. Родители, чьё представление опосредовано медиа, оценивают ИИ строже своих собственных детей.</p>
+  <div class="foot"><div class="f-l">1.1 · Восприятие</div><div class="f-r">28</div></div>
+</section>
+
+<!-- ==================================================================
+     1.2 — РЕАЛЬНЫЕ ПРАКТИКИ
+     ================================================================== -->
+<section class="subsection" data-label="1.2 Практики">
+  <div class="head"><div class="h-l"><span>01 · Теория</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">1.2</div>
+  <div class="sub-title">Реальные практики использования: типология режимов</div>
+  <div class="foot"><div class="f-l">01 · Теория</div><div class="f-r">29</div></div>
+</section>
+
+<section data-label="Не одна практика">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Не&nbsp;одна практика&nbsp;— а&nbsp;<span class="accent">набор разных по&nbsp;смыслу режимов</span>.</h2>
+  <p class="body fg2">Публичная риторика сводит использование ИИ учащимися к&nbsp;одному узкому случаю — обходу заданий. Крупные опросы рисуют картину принципиально иную: уже из&nbsp;самих категорий, по&nbsp;которым социологи разбивают ответы, это видно.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">30</div></div>
+</section>
+
+<section data-label="Pew 2024">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Pew Research Center</span> · осень 2024 · 1&nbsp;391 подросток 13–17 лет</div>
+  <h2 class="slide-h2 tight">26% подростков использовали ChatGPT для учебных задач.</h2>
+  <p class="body">В&nbsp;два раза больше, чем годом раньше.</p>
+  <p class="body fg2">Но допустимость такого использования распределялась по&nbsp;задачам <strong>крайне неравномерно</strong>.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">31</div></div>
+</section>
+
+<section data-label="Иерархия 54/29/18">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Доля подростков, считающих приемлемым использовать ChatGPT, чтобы:</div>
+  <div class="gap-md"></div>
+  <div class="tagged-fact"><span class="tf-tag">54%</span><span class="tf-txt">разобраться с&nbsp;незнакомой темой</span></div>
+  <div class="tagged-fact"><span class="tf-tag">29%</span><span class="tf-txt">решить задачу по&nbsp;математике</span></div>
+  <div class="tagged-fact"><span class="tf-tag">18%</span><span class="tf-txt">написать за&nbsp;себя эссе</span></div>
+  <div class="gap-md"></div>
+  <p class="body-sm">Сами школьники выстраивают чёткую иерархию: получить объяснение&nbsp;— допустимо, передать задание на&nbsp;исполнение&nbsp;— нет.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">32</div></div>
+</section>
+
+<section data-label="Pew 2026">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Pew Research Center</span> · 2026 · 1&nbsp;458 подростков</div>
+  <h2 class="slide-h2 tight">Распределение глубины использования.</h2>
+  <ul class="steps">
+    <li><span class="idx">64%</span><span class="txt">пользовались каким-либо чат-ботом</span></li>
+    <li><span class="idx">54%</span><span class="txt">для учебных задач</span></li>
+    <li><span class="idx">44%</span><span class="txt">для «некоторых» учебных задач</span></li>
+    <li><span class="idx">10%</span><span class="txt">для «большинства» учебных задач</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">33</div></div>
+</section>
+
+<section data-label="Преувеличение">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Любопытный разрыв внутри подростковой среды</div>
+  <h2 class="slide-h2 tight">59% подростков считают, что у&nbsp;них в&nbsp;школе списывание через ИИ происходит «по&nbsp;крайней мере довольно часто».</h2>
+  <p class="body">Самоотчёт о&nbsp;написании целых работ через ИИ&nbsp;— на&nbsp;уровне <strong>единиц процентов</strong>.</p>
+  <p class="body fg2">Типичное морально окрашенное социальное преувеличение, известное в&nbsp;социологии задолго до&nbsp;появления искусственного интеллекта.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">34</div></div>
+</section>
+
+<section data-label="Walton режимы">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Walton Family Foundation</span> · 2023 · основные режимы использования</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Учителя</div>
+      <div style="font-size:30px; line-height:1.4; color:var(--fg)">
+        <p style="margin:0 0 12px 0"><strong>30%</strong>&nbsp;&nbsp;планирование уроков</p>
+        <p style="margin:0 0 12px 0"><strong>30%</strong>&nbsp;&nbsp;генерация творческих идей</p>
+        <p style="margin:0"><strong>27%</strong>&nbsp;&nbsp;подготовка материала по&nbsp;теме</p>
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Ученики</div>
+      <div style="font-size:30px; line-height:1.4; color:var(--fg)">
+        <p style="margin:0 0 12px 0">генерация идей</p>
+        <p style="margin:0 0 12px 0">первое представление о&nbsp;теме</p>
+        <p style="margin:0">запрос на&nbsp;объяснение материала</p>
+      </div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:48px">Целевая генерация целостных работ&nbsp;— то, что обывательски называют «списыванием через ИИ»&nbsp;— фигурирует в&nbsp;этих данных как <strong>меньшинство случаев</strong>.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">35</div></div>
+</section>
+
+<section class="bignum-slide" data-label="88% / 79%">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Положительное влияние ChatGPT на&nbsp;работу и&nbsp;учёбу</div>
+  <div class="num-pair">
+    <div>
+      <div class="n hi">88%</div>
+      <div class="lab">Учителя</div>
+    </div>
+    <div>
+      <div class="n hi">79%</div>
+      <div class="lab">Школьники</div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:32px">Walton Family Foundation · уже к&nbsp;2023&nbsp;году.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">36</div></div>
+</section>
+
+<section data-label="Jisc">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Jisc</span> · Великобритания · 9&nbsp;очных форумов, 200+ студентов</div>
+  <h2 class="slide-h2 tight">ИИ описывается не&nbsp;как машина для&nbsp;готовых ответов&nbsp;— а&nbsp;как <span class="accent">тренер активного обучения</span>.</h2>
+  <p class="body">Поддержка письменной речи · генерация идей · структурирование конспектов · имитация разговора с&nbsp;репетитором · тренировка навыков для&nbsp;будущей работы.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">37</div></div>
+</section>
+
+<section class="bignum-slide" data-label="TEQSA 100%">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">TEQSA · Австралия · ноябрь 2024 · регуляторный запрос</div>
+  <div class="bignum">100%</div>
+  <div class="bignum-cap-bot">Все&nbsp;203 зарегистрированных в&nbsp;Австралии провайдера высшего образования представили институциональные планы по&nbsp;работе с&nbsp;генеративным ИИ.</div>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">38</div></div>
+</section>
+
+<section data-label="OECD">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">OECD · Digital Education Outlook 2026</span></div>
+  <h2 class="slide-h2 tight">Международные данные.</h2>
+  <ul class="steps">
+    <li><span class="idx">37%</span><span class="txt">учителей средней школы стран TALIS&nbsp;— используют генеративный ИИ в&nbsp;работе</span></li>
+    <li><span class="idx">48%</span><span class="txt">учеников средней школы Великобритании&nbsp;— пользовались ChatGPT</span></li>
+    <li><span class="idx">94%</span><span class="txt">студентов вузов Германии&nbsp;— использовали ИИ в&nbsp;2025&nbsp;году</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">39</div></div>
+</section>
+
+<section class="bignum-slide" data-label="94% Германия">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Германия · исследование 23&nbsp;000+ студентов вузов</div>
+  <div class="bignum">94%</div>
+  <div class="bignum-cap-bot">использовали ИИ в&nbsp;2025&nbsp;году. Из&nbsp;них <strong>65%</strong>&nbsp;— ежедневно или еженедельно.</div>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">40</div></div>
+</section>
+
+<section data-label="Вывод 1.2">
+  <div class="head"><div class="h-l"><span>1.2 · Практики</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Вывод 1.2</div>
+  <h2 class="slide-h2 tight">Режим, в&nbsp;котором ИИ замещает целое задание, — <span class="accent">меньшинство случаев</span>.</h2>
+  <p class="body">Преобладают режимы объяснения материала, формирования первого представления о&nbsp;теме, структурирования конспектов и&nbsp;поддержки написания.</p>
+  <p class="body fg2">Сами учащиеся проводят моральную границу между этими режимами и&nbsp;в&nbsp;подавляющем большинстве не&nbsp;считают передачу задания на&nbsp;ИИ приемлемой.</p>
+  <div class="foot"><div class="f-l">1.2 · Практики</div><div class="f-r">41</div></div>
+</section>
+
+<!-- ==================================================================
+     1.3 — ТЕОРЕТИЧЕСКАЯ РАМКА
+     ================================================================== -->
+<section class="subsection" data-label="1.3 Рамка">
+  <div class="head"><div class="h-l"><span>01 · Теория</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">1.3</div>
+  <div class="sub-title">Теоретическая рамка: когнитивная нагрузка и&nbsp;мотивация</div>
+  <div class="foot"><div class="f-l">01 · Теория</div><div class="f-r">42</div></div>
+</section>
+
+<section data-label="Зачем рамка">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Без рамки наблюдение «один и&nbsp;тот же инструмент даёт разные результаты» <span class="accent">остаётся фактом, не&nbsp;объяснением</span>.</h2>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">43</div></div>
+</section>
+
+<section data-label="Два направления">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Два направления педагогической психологии.</h2>
+  <div class="two-col" style="margin-top:56px">
+    <div>
+      <div class="col-label">Теория I</div>
+      <div class="col-h">Когнитивная нагрузка</div>
+      <div class="col-b">Джон Свеллер, 1988</div>
+    </div>
+    <div>
+      <div class="col-label">Теория II</div>
+      <div class="col-h">Самодетерминация</div>
+      <div class="col-b">Эдвард Деси, Ричард Райан<br>середина 1980-х</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">44</div></div>
+</section>
+
+<section data-label="Свеллер">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Джон Свеллер</span> · 1988 · теория когнитивной нагрузки</div>
+  <h2 class="slide-h2 tight">Рабочая память человека способна одновременно удерживать <span class="accent">ограниченное число элементов</span>.</h2>
+  <p class="body">Эта пропускная способность&nbsp;— главное ограничение для&nbsp;усвоения нового материала.</p>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">45</div></div>
+</section>
+
+<section data-label="Три типа нагрузки">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Три типа когнитивной нагрузки.</h2>
+  <ul class="steps">
+    <li><span class="idx">01</span><span class="txt"><strong>Внутренняя</strong>&nbsp;— определяется сложностью самого материала</span></li>
+    <li><span class="idx">02</span><span class="txt"><strong>Внешняя (паразитная)</strong>&nbsp;— создаётся плохо организованным учебным окружением</span></li>
+    <li><span class="idx">03</span><span class="txt"><strong>Продуктивная</strong>&nbsp;— связана с&nbsp;формированием в&nbsp;долговременной памяти когнитивных схем</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">46</div></div>
+</section>
+
+<section data-label="Что есть обучение">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Обучение&nbsp;— перевод элементов из&nbsp;рабочей памяти в&nbsp;<span class="accent">долговременную, схематически организованную</span>.</h2>
+  <p class="body fg2">И&nbsp;этот перевод требует, чтобы ученик действительно <strong>выполнял интеллектуальную работу</strong>.</p>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">47</div></div>
+</section>
+
+<section data-label="Применение к ИИ">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Применение к&nbsp;ИИ</div>
+  <h2 class="slide-h2 tight">Нейросеть способна принять на&nbsp;себя значительную часть когнитивной нагрузки.</h2>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Продуктивно</div>
+      <div class="col-b" style="color:var(--fg); font-size:26px">Ученик использует объяснение, чтобы освободить ресурсы рабочей памяти и&nbsp;вложить их&nbsp;в&nbsp;формирование собственных схем. Поняв&nbsp;— решает следующие задачи сам.</div>
+    </div>
+    <div>
+      <div class="col-label">Деструктивно</div>
+      <div class="col-b" style="color:var(--fg); font-size:26px">Ученик использует ответ как замену собственной работе. Нагрузка снимается без формирования схем: ответ получен, компетенция не&nbsp;приобретена.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">48</div></div>
+</section>
+
+<section data-label="Разница потом">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Внешне эти два процесса <strong>в&nbsp;моменте трудно различимы</strong>.</h2>
+  <p class="body-lg fg2">Разница проступает <span class="accent">потом</span>&nbsp;— когда нужно решить похожую задачу без&nbsp;помощи нейросети.</p>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">49</div></div>
+</section>
+
+<section data-label="Деси и Райан">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Эдвард Деси и&nbsp;Ричард Райан</span> · с&nbsp;середины 1980-х · теория самодетерминации</div>
+  <h2 class="slide-h2 tight">Человеческая мотивация качественно неоднородна.</h2>
+  <p class="body">Располагается на&nbsp;шкале:</p>
+  <div class="gap-md"></div>
+  <div style="display:flex; align-items:center; gap:32px; max-width:1500px">
+    <div style="font-size:28px; color:var(--fg)">внешняя<br><span style="font-family:'IBM Plex Mono'; font-size:18px; color:var(--fg-3); letter-spacing:0.06em">определяется требованиями</span></div>
+    <div style="flex:1; height:1px; background:var(--accent)"></div>
+    <div style="font-size:28px; color:var(--fg); text-align:right">автономная<br><span style="font-family:'IBM Plex Mono'; font-size:18px; color:var(--fg-3); letter-spacing:0.06em">определяется интересом</span></div>
+  </div>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">50</div></div>
+</section>
+
+<section data-label="Три потребности">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Уровень автономии мотивации зависит от&nbsp;трёх базовых потребностей.</h2>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:64px; margin-top:48px; max-width:1640px">
+    <div>
+      <div style="font-family:'IBM Plex Mono'; font-size:18px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:16px">01</div>
+      <div style="font-size:48px; font-weight:500; line-height:1.05; letter-spacing:-0.015em">Компетентность</div>
+    </div>
+    <div>
+      <div style="font-family:'IBM Plex Mono'; font-size:18px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:16px">02</div>
+      <div style="font-size:48px; font-weight:500; line-height:1.05; letter-spacing:-0.015em">Автономия</div>
+    </div>
+    <div>
+      <div style="font-family:'IBM Plex Mono'; font-size:18px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:16px">03</div>
+      <div style="font-size:48px; font-weight:500; line-height:1.05; letter-spacing:-0.015em">Связанность с&nbsp;другими</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">51</div></div>
+</section>
+
+<section data-label="Авт vs контр">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="two-col">
+    <div>
+      <div class="col-label">Автономная мотивация</div>
+      <div class="col-h">Глубокое усвоение материала</div>
+      <div class="col-b">Стойкая включённость в&nbsp;работу.<br>Общее благополучие учащегося.</div>
+    </div>
+    <div>
+      <div class="col-label">Контролируемая мотивация</div>
+      <div class="col-h">Поверхностное усвоение</div>
+      <div class="col-b">Тревожность.<br>Ранний уход из&nbsp;обучения.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">52</div></div>
+</section>
+
+<section data-label="Предсказание ИИ">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">В&nbsp;контексте ИИ</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Ученик с&nbsp;автономной мотивацией</div>
+      <div class="col-b" style="color:var(--fg); font-size:28px; line-height:1.4">обращается к&nbsp;ИИ <strong>как к&nbsp;опоре</strong>:<br>запросить объяснение, проверить собственную догадку, сформулировать вопрос.</div>
+    </div>
+    <div>
+      <div class="col-label">Ученик, ориентированный на&nbsp;внешнее</div>
+      <div class="col-b" style="color:var(--fg); font-size:28px; line-height:1.4">использует ИИ <strong>как замену работе</strong>&nbsp;— это самый короткий путь к&nbsp;внешне заданной цели.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">53</div></div>
+</section>
+
+<section data-label="Mastery vs Performance">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Близкое различение, активно используемое в&nbsp;современных исследованиях</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Mastery orientation</div>
+      <div class="col-h">Главное&nbsp;— собственное продвижение в&nbsp;понимании материала</div>
+    </div>
+    <div>
+      <div class="col-label">Performance orientation</div>
+      <div class="col-h">Главное&nbsp;— превосходство над другими или избегание неудачи</div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:48px">Это различение&nbsp;— один из&nbsp;самых устойчивых факторов, предсказывающих, как именно школьник или студент работает с&nbsp;генеративной нейросетью.</p>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">54</div></div>
+</section>
+
+<section data-label="Синтез">
+  <div class="head"><div class="h-l"><span>1.3 · Рамка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Синтез двух теорий</div>
+  <h2 class="slide-h2 tight">Искусственный интеллект сам по&nbsp;себе не&nbsp;оказывает на&nbsp;учебные результаты однозначного влияния.</h2>
+  <div class="callout">
+    <p class="body">Он выступает <strong>усилителем</strong> тех мотивационных установок и&nbsp;тех моделей работы с&nbsp;материалом, которые у&nbsp;ученика уже есть.</p>
+  </div>
+  <p class="body-sm">Это позволяет говорить об&nbsp;ИИ не&nbsp;как о&nbsp;причине учебных эффектов, а&nbsp;как о&nbsp;факторе, усиливающем уже существующие установки&nbsp;— и&nbsp;тем самым избегать как технологического оптимизма, так и&nbsp;технологического алармизма.</p>
+  <div class="foot"><div class="f-l">1.3 · Рамка</div><div class="f-r">55</div></div>
+</section>
+
+<!-- ==================================================================
+     02 · РАЗДЕЛИТЕЛЬ — ЭМПИРИЧЕСКИЙ АНАЛИЗ
+     ================================================================== -->
+<section class="divider" data-label="02 Эмпирика">
+  <div class="d-label">Часть вторая</div>
+  <div class="d-num">02</div>
+  <div class="d-title">Эмпирический анализ</div>
+</section>
+
+<!-- ==================================================================
+     2.1 — ДИНАМИКА АКАДЕМИЧЕСКОЙ НЕЧЕСТНОСТИ
+     ================================================================== -->
+<section class="subsection" data-label="2.1 Нечестность">
+  <div class="head"><div class="h-l"><span>02 · Эмпирика</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">2.1</div>
+  <div class="sub-title">Динамика академической нечестности до&nbsp;и&nbsp;после появления ChatGPT</div>
+  <div class="foot"><div class="f-l">02 · Эмпирика</div><div class="f-r">57</div></div>
+</section>
+
+<section data-label="Логика беспокойства">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Логика общественного беспокойства предсказывала&nbsp;бы <strong>заметный рост</strong> академической нечестности после ChatGPT.</h2>
+  <p class="body-lg fg2">Но&nbsp;данные эту логику <span class="accent">не&nbsp;подтверждают</span>.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">58</div></div>
+</section>
+
+<section data-label="Ли и соавт">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Ли, Поуп, Майлс, Сарате</span> · 2024 · Computers and Education: AI</div>
+  <h2 class="slide-h2 tight">Самое прямое сопоставление уровней списывания до&nbsp;и&nbsp;после ChatGPT.</h2>
+  <p class="body">Инструмент Challenge Success (Stanford)&nbsp;— стандартизированные замеры академического поведения школьников.</p>
+  <p class="body fg2">Три американские школы: частная, государственная, чартерная. Каждая&nbsp;— с&nbsp;самой собой до&nbsp;и&nbsp;после ноября 2022 года.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">59</div></div>
+</section>
+
+<section class="bignum-slide" data-label="60-70%">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Ежемесячный уровень самоотчёта об&nbsp;академической нечестности</div>
+  <div class="bignum">60–70%</div>
+  <div class="bignum-cap-bot">И&nbsp;до&nbsp;прихода ChatGPT, и&nbsp;после&nbsp;— <strong>в&nbsp;тех же пределах</strong>.<span class="src">Ли, Поуп, Майлс, Сарате · 2024</span></div>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">60</div></div>
+</section>
+
+<section data-label="59.9 / 69.5">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Конкретные показатели двух школ с&nbsp;наиболее полными данными</div>
+  <div class="num-pair">
+    <div>
+      <div class="n">59,9%</div>
+      <div class="lab">Частная школа</div>
+    </div>
+    <div>
+      <div class="n">69,5%</div>
+      <div class="lab">Государственная школа</div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:32px">Статистически <strong>не&nbsp;отличается</strong> от&nbsp;значений за&nbsp;более ранний период.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">61</div></div>
+</section>
+
+<section class="quote-slide" data-label="Цитата Ли">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="quote-mark">“</div>
+  <div class="quote-text">ChatGPT изменил методы списывания, но&nbsp;не&nbsp;его распространённость.</div>
+  <div class="quote-attr">— Ли, Поуп, Майлс, Сарате · Phi Delta Kappan · 2024</div>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">62</div></div>
+</section>
+
+<section data-label="ICAI эталон">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Международный центр академической честности (ICAI)</span> · наследует работе Дональда Маккейба</div>
+  <h2 class="slide-h2 tight">Исторический эталон, с&nbsp;которым надо сравнить эти&nbsp;60–70%.</h2>
+  <p class="body">Сводные данные охватывают <strong>свыше 71&nbsp;000 студентов</strong> американских колледжей.</p>
+  <p class="body fg2">Период: осень 2002&nbsp;— весна 2015.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">63</div></div>
+</section>
+
+<section class="bignum-slide" data-label="68% ICAI">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">71&nbsp;000 студентов · 2002–2015 · ICAI</div>
+  <div class="bignum">68%</div>
+  <div class="bignum-cap-bot">признавались в&nbsp;той или иной форме академической нечестности.<br><strong>39%</strong>&nbsp;— на&nbsp;тестах. <strong>62%</strong>&nbsp;— на&nbsp;письменных работах.<span class="src">McCabe / ICAI</span></div>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">64</div></div>
+</section>
+
+<section data-label="Пересмотры">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Современные пересмотры методики Маккейба</div>
+  <div class="gap-md"></div>
+  <div class="tagged-fact"><span class="tf-tag">2024</span><span class="tf-txt">Реттингер и&nbsp;соавт.</span></div>
+  <div class="tagged-fact"><span class="tf-tag">2024</span><span class="tf-txt">Биркс и&nbsp;соавт.</span></div>
+  <div class="gap-md"></div>
+  <p class="body">Оба пересмотра <strong>сохраняют ту&nbsp;же общую цифру</strong> при более строгом психометрическом контроле.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">65</div></div>
+</section>
+
+<section data-label="Сопоставление">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Те&nbsp;же приблизительно <span class="accent">две трети</span> учащихся, что признаются в&nbsp;нечестности сегодня, признавались в&nbsp;ней и&nbsp;пятнадцать лет назад.</h2>
+  <p class="body-lg fg2">Задолго до&nbsp;того, как существовала возможность поручить эссе нейросети.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">66</div></div>
+</section>
+
+<section data-label="Главный вывод 2.1">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Центральный вывод 2.1</div>
+  <h2 class="slide-h2 tight">Утверждение, что ChatGPT превратил списывание из&nbsp;периферийного явления в&nbsp;массовое, <span class="accent">не&nbsp;соответствует действительности</span>.</h2>
+  <p class="body">Потому что списывание было массовым и&nbsp;до&nbsp;ChatGPT.</p>
+  <p class="body fg2">Распространение ИИ не&nbsp;вызвало эпидемии. Оно лишь дало тем&nbsp;же ученикам, которые и&nbsp;прежде прибегали к&nbsp;ГДЗ, списыванию у&nbsp;соседа или покупке готового реферата, ещё один инструмент для&nbsp;уже существовавшей практики.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">67</div></div>
+</section>
+
+<section data-label="Методологическая трудность">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Методологическая трудность</div>
+  <h2 class="slide-h2 tight">С&nbsp;появлением ИИ изменилось и&nbsp;само определение того, что считать списыванием.</h2>
+  <ul class="steps" style="margin-top:24px">
+    <li><span class="idx">?</span><span class="txt">Перефразирование абзаца, написанного ChatGPT,&nbsp;— это нечестность?</span></li>
+    <li><span class="idx">?</span><span class="txt">Запрос объяснения сложной темы перед самостоятельным выполнением задания?</span></li>
+    <li><span class="idx">?</span><span class="txt">Проверка собственного решения через нейросеть?</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">68</div></div>
+</section>
+
+<section data-label="Серая зона">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Йинг и&nbsp;соавт.</span> · 2025 · качественный анализ</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label" style="color:var(--accent)">Списывание</div>
+      <div class="col-b" style="font-size:24px; color:var(--fg); line-height:1.5">
+        прямое копирование без понимания<br>
+        использование ИИ без&nbsp;разрешения<br>
+        выдача чужой работы за&nbsp;свою
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Не&nbsp;списывание</div>
+      <div class="col-b" style="font-size:24px; color:var(--fg); line-height:1.5">
+        использование ИИ с&nbsp;разрешения<br>
+        перефразирование для&nbsp;понимания<br>
+        обращение к&nbsp;ИИ за&nbsp;объяснением
+      </div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:48px">Между этими полюсами&nbsp;— обширная <strong>серая зона</strong>, оценка которой зависит от&nbsp;намерения, типа задания и&nbsp;принятых в&nbsp;дисциплине норм.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">69</div></div>
+</section>
+
+<section data-label="Переговоры о норме">
+  <div class="head"><div class="h-l"><span>2.1 · Нечестность</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Образовательная система в&nbsp;реальном времени <span class="accent">ведёт переговоры о&nbsp;том, что считать честной работой</span>.</h2>
+  <p class="body fg2">Переговоры эти далеки от&nbsp;завершения. Это не&nbsp;помеха исследованию&nbsp;— это социологический сюжет сам по&nbsp;себе.</p>
+  <div class="foot"><div class="f-l">2.1 · Нечестность</div><div class="f-r">70</div></div>
+</section>
+
+<!-- ==================================================================
+     2.2 — МОТИВАЦИЯ И РЕЖИМ
+     ================================================================== -->
+<section class="subsection" data-label="2.2 Мотивация">
+  <div class="head"><div class="h-l"><span>02 · Эмпирика</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">2.2</div>
+  <div class="sub-title">Мотивация и&nbsp;режим использования ИИ</div>
+  <div class="foot"><div class="f-l">02 · Эмпирика</div><div class="f-r">71</div></div>
+</section>
+
+<section data-label="Главный вопрос">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Если уровень нечестности не&nbsp;вырос&nbsp;— тогда возникает следующий вопрос.</h2>
+  <div class="gap-md"></div>
+  <h2 class="slide-h2" style="font-size:54px; color:var(--accent)">Чем определяется, как именно ученик использует ИИ?</h2>
+  <p class="body fg2">Когда обращение к&nbsp;нейросети остаётся обращением за&nbsp;пониманием, а&nbsp;когда становится способом обойти задание?</p>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">72</div></div>
+</section>
+
+<section data-label="Ответ">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Ответ эмпирических работ последних лет</div>
+  <h2 class="slide-h2">Главный фактор&nbsp;— <span class="accent">мотивационная ориентация самого ученика</span>.</h2>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">73</div></div>
+</section>
+
+<section data-label="Стоянов">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Александр Стоянов</span> · INPACT 2024 · опросное исследование</div>
+  <h2 class="slide-h2 tight">413 студентов высших учебных заведений.</h2>
+  <p class="body">Стандартизированный инструмент: целевая ориентация&nbsp;— ради понимания или ради внешнего успеха?</p>
+  <p class="body fg2">Сопоставление с&nbsp;частотой обращения к&nbsp;ChatGPT по&nbsp;13&nbsp;различным учебным задачам.</p>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">74</div></div>
+</section>
+
+<section data-label="Результат Стоянова">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Закономерность оказалась устойчивой</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Mastery-ориентация</div>
+      <div class="col-h">Реже к&nbsp;ChatGPT</div>
+      <div class="col-b">Особенно для&nbsp;оцениваемых письменных работ.</div>
+    </div>
+    <div>
+      <div class="col-label" style="color:var(--accent)">Performance-ориентация</div>
+      <div class="col-h">Существенно чаще</div>
+      <div class="col-b">Учёба&nbsp;— это прежде всего достижение внешнего результата.</div>
+    </div>
+  </div>
+  <p class="body-sm" style="margin-top:48px">Чем сильнее ученик ориентирован на&nbsp;понимание, тем менее он&nbsp;зависит от&nbsp;нейросети.</p>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">75</div></div>
+</section>
+
+<section data-label="Шмидт">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Группа Шмидта</span> · 2025 · Applied Cognitive Psychology · эксперимент</div>
+  <h2 class="slide-h2 tight">104 немецких студента. Случайное распределение между двумя условиями.</h2>
+  <p class="body">Тот&nbsp;же ChatGPT. Те&nbsp;же 4&nbsp;темы из&nbsp;социальной психологии.<br>Меняется только <strong>контекст задачи</strong>.</p>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">76</div></div>
+</section>
+
+<section data-label="Два условия">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="two-col">
+    <div>
+      <div class="col-label">Условие «мастерское»</div>
+      <div class="col-h">Инструкции подчёркивают <em style="font-style:normal; color:var(--accent)">личный прогресс</em></div>
+      <div class="col-b">Насколько ученик сегодня лучше понимает материал, чем вчера.</div>
+    </div>
+    <div>
+      <div class="col-label">Условие «результативное»</div>
+      <div class="col-h">Акцент на <em style="font-style:normal; color:var(--accent)">сравнении</em> с&nbsp;другими</div>
+      <div class="col-b">И&nbsp;на&nbsp;абсолютной оценке.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">77</div></div>
+</section>
+
+<section data-label="Разные результаты Шмидт">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="two-col">
+    <div>
+      <div class="col-label">Мастерское условие</div>
+      <div class="col-h" style="color:var(--accent)">Существенно лучшее усвоение материала</div>
+    </div>
+    <div>
+      <div class="col-label">Результативное условие</div>
+      <div class="col-h">Более высокая тревожность.<br>Запросы на&nbsp;поверхностные факты&nbsp;— для&nbsp;того, чтобы казаться эрудированным.</div>
+      <div class="col-b" style="margin-top:16px">В&nbsp;собственно знании эти факты не&nbsp;складывались.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">78</div></div>
+</section>
+
+<section data-label="Причинная зависимость">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Поскольку условия задавались экспериментально, можно говорить уже не&nbsp;о&nbsp;согласованности, а&nbsp;о&nbsp;<span class="accent">причинной зависимости</span>.</h2>
+  <p class="body fg2">Способ организации учебной задачи определяет, какой режим работы с&nbsp;ИИ в&nbsp;ней разворачивается&nbsp;— и&nbsp;какой результат он&nbsp;приносит.</p>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">79</div></div>
+</section>
+
+<section data-label="Свойство ситуации">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">«Правильное» использование ИИ&nbsp;— это <span class="accent">не&nbsp;свойство ученика как такового</span>, а&nbsp;свойство ситуации, в&nbsp;которой ученик оказывается.</h2>
+  <p class="body fg2">Тот&nbsp;же инструмент. Тот&nbsp;же ученик. Разные ситуации&nbsp;— разные результаты.</p>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">80</div></div>
+</section>
+
+<section data-label="Кальнечи">
+  <div class="head"><div class="h-l"><span>2.2 · Мотивация</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Кальнечи и&nbsp;соавт.</span> · 2023 · Learning and Individual Differences</div>
+  <h2 class="slide-h2 tight">Самая цитируемая формулировка аргумента о&nbsp;неоднородности эффектов.</h2>
+  <div class="callout">
+    <p class="body">Один и&nbsp;тот же инструмент даёт <strong>качественно разные результаты</strong> у&nbsp;разных учеников. Поэтому любое категоричное суждение о&nbsp;«влиянии ИИ на&nbsp;образование» как такового методологически некорректно.</p>
+  </div>
+  <div class="foot"><div class="f-l">2.2 · Мотивация</div><div class="f-r">81</div></div>
+</section>
+
+<!-- ==================================================================
+     2.3 — ЭФФЕКТЫ ИИ НА УЧЕБНЫЕ РЕЗУЛЬТАТЫ
+     ================================================================== -->
+<section class="subsection" data-label="2.3 Эффекты">
+  <div class="head"><div class="h-l"><span>02 · Эмпирика</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">2.3</div>
+  <div class="sub-title">Разные эффекты ИИ на&nbsp;учебные результаты</div>
+  <div class="foot"><div class="f-l">02 · Эмпирика</div><div class="f-r">82</div></div>
+</section>
+
+<section data-label="Различия в результатах">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Различия в&nbsp;способах использования&nbsp;— это одно.</h2>
+  <h2 class="slide-h2" style="margin-top:24px">Различия в&nbsp;результатах, к&nbsp;которым эти способы приводят,&nbsp;— <span class="accent">другое</span>.</h2>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">83</div></div>
+</section>
+
+<section data-label="Бастани введение">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Центральное место среди экспериментальных работ занимает <span class="accent">одна</span>&nbsp;— без которой разговор об&nbsp;ИИ в&nbsp;образовании сейчас попросту невозможен.</h2>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">84</div></div>
+</section>
+
+<section data-label="Бастани источник">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Хамза Бастани и&nbsp;соавт.</span> · 2025 · Proceedings of the National Academy of Sciences</div>
+  <h2 class="slide-h2 tight">Рандомизированное контролируемое испытание.<br>С&nbsp;предварительной регистрацией протокола.</h2>
+  <p class="body">≈&nbsp;<strong>1&nbsp;000 турецких школьников</strong> старших классов. Математика.</p>
+  <p class="body-sm" style="margin-top:24px">Предварительная регистрация в&nbsp;социальных науках считается знаком методологической чистоты.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">85</div></div>
+</section>
+
+<section data-label="Три группы">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Учеников разделили на&nbsp;три группы.</h2>
+  <ul class="steps" style="margin-top:24px">
+    <li><span class="idx">A</span><span class="txt"><strong>Контроль</strong>&nbsp;— обычные занятия, без&nbsp;доступа к&nbsp;ИИ</span></li>
+    <li><span class="idx">B</span><span class="txt"><strong>Обычный ChatGPT</strong>&nbsp;— в&nbsp;исходном виде, без&nbsp;каких-либо специальных ограничителей</span></li>
+    <li><span class="idx">C</span><span class="txt"><strong>ChatGPT-наставник</strong>&nbsp;— модель, настроенная не&nbsp;выдавать готовых ответов: задаёт наводящие вопросы и&nbsp;подсказки, направляющие к&nbsp;решению</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">86</div></div>
+</section>
+
+<section data-label="+48 +127 тренировки">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Тренировочные занятия · оценки относительно контрольной группы</div>
+  <div class="num-pair" style="margin-top:32px; margin-bottom:32px">
+    <div>
+      <div class="n" style="color:var(--fg)">+48%</div>
+      <div class="lab">Обычный ChatGPT</div>
+    </div>
+    <div>
+      <div class="n hi">+127%</div>
+      <div class="lab">ChatGPT-наставник</div>
+    </div>
+  </div>
+  <p class="body-sm">Обе группы с&nbsp;доступом к&nbsp;ИИ занимались лучше контрольной. Картина выглядит так, как если&nbsp;бы её&nbsp;можно было положить в&nbsp;основу любого технологически-оптимистического выступления.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">87</div></div>
+</section>
+
+<section data-label="А потом был экзамен">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <h2 class="slide-h2" style="font-size:96px; font-weight:400; line-height:1.05">А&nbsp;потом школьникам дали&nbsp;<span class="accent">экзамен</span>.</h2>
+  <p class="body-lg" style="margin-top:48px">Без ИИ&nbsp;— отключённого одинаково для всех трёх групп.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">88</div></div>
+</section>
+
+<section class="bignum-slide" data-label="−17% Бастани">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="bignum-cap-top">Группа «обычный ChatGPT» на&nbsp;экзамене без&nbsp;ИИ</div>
+  <div class="bignum">−17%</div>
+  <div class="bignum-cap-bot"><strong>хуже</strong> контрольной группы,<br>никогда не&nbsp;имевшей доступа к&nbsp;ИИ.<span class="src">Бастани и&nbsp;соавт. · PNAS 2025</span></div>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">89</div></div>
+</section>
+
+<section data-label="Наставник нейтрален">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">А&nbsp;группа ChatGPT-наставника</div>
+  <h2 class="slide-h2 tight">Показала результат, <span class="accent">статистически неотличимый</span> от&nbsp;контрольной.</h2>
+  <p class="body fg2">Помог не&nbsp;вредя.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">90</div></div>
+</section>
+
+<section data-label="Стоит остановиться">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Один и&nbsp;тот же инструмент&nbsp;— одна и&nbsp;та&nbsp;же модель GPT&nbsp;— применённый к&nbsp;одной и&nbsp;той&nbsp;же группе учеников, на&nbsp;одном и&nbsp;том&nbsp;же материале, по&nbsp;одному и&nbsp;тому&nbsp;же предмету, дал <span class="accent">противоположные учебные эффекты</span>.</h2>
+  <p class="body fg2">В&nbsp;зависимости от&nbsp;того, как этот инструмент был встроен в&nbsp;работу.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">91</div></div>
+</section>
+
+<section data-label="Иллюзия компетенции">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Иллюзия компетенции.</h2>
+  <p class="body-lg">В&nbsp;одной форме&nbsp;— где ИИ просто выдаёт ответы&nbsp;— он&nbsp;не&nbsp;только не&nbsp;помог, но&nbsp;<strong>активно повредил</strong>.</p>
+  <p class="body fg2">Ученики привыкли получать решения, не&nbsp;делая собственной работы. В&nbsp;момент, когда привычная опора была отнята, они оказались подготовлены хуже тех, кто никогда такой опоры не&nbsp;имел.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">92</div></div>
+</section>
+
+<section data-label="Связь с теорией">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Связь с&nbsp;теорией когнитивной нагрузки</div>
+  <h2 class="slide-h2 tight">ИИ, принимающий на&nbsp;себя нагрузку и&nbsp;не&nbsp;оставляющий ученику собственной работы, не&nbsp;формирует у&nbsp;него знания.</h2>
+  <div class="callout">
+    <p class="body">Он формирует <strong>одолженную способность</strong>, которая исчезает вместе с&nbsp;источником.</p>
+  </div>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">93</div></div>
+</section>
+
+<section data-label="Барках">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Александре Барках</span> · 2025 · Social Sciences and Humanities Open · Бразилия</div>
+  <h2 class="slide-h2 tight">Независимая репликация эффекта Бастани.</h2>
+  <p class="body">Рандомизированный эксперимент. 120 студентов. Запоминание материала проверялось <strong>через&nbsp;45 дней</strong> после исходного занятия.</p>
+  <p class="body fg2">Картина та&nbsp;же: ChatGPT повышает результаты немедленного выполнения, но&nbsp;<span class="accent">снижает то, что остаётся через полтора месяца</span>.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">94</div></div>
+</section>
+
+<section data-label="Мета-анализ Дэн">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Группа Дэна</span> · 2025 · Computers and Education · мета-анализ</div>
+  <h2 class="slide-h2 tight">Сводный анализ 69 экспериментальных исследований 2022–2024 годов.</h2>
+  <ul class="steps" style="margin-top:24px">
+    <li><span class="idx">+</span><span class="txt">Положительно влияет на&nbsp;академическую успеваемость и&nbsp;интерес к&nbsp;учёбе</span></li>
+    <li><span class="idx">−</span><span class="txt">Существенно <strong>снижает когнитивные усилия</strong></span></li>
+    <li><span class="idx">=</span><span class="txt">Не&nbsp;оказывает значимого влияния на&nbsp;самоэффективность</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">95</div></div>
+</section>
+
+<section data-label="Снижение усилий">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Снижение усилий без замены их&nbsp;продуктивной работой&nbsp;— ровно тот механизм, который Бастани и&nbsp;Барках обнаружили как <span class="accent">источник долгосрочного учебного вреда</span>.</h2>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">96</div></div>
+</section>
+
+<section data-label="Лю и Лу">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="src-block"><span class="src-name">Лю и&nbsp;Лу</span> · 2025 · Journal of Computer Assisted Learning · мета-анализ</div>
+  <h2 class="slide-h2 tight">37 эффектов из&nbsp;публикаций 2022–2025 годов.</h2>
+  <p class="body">Общий эффект ChatGPT на&nbsp;успеваемость положителен&nbsp;— но&nbsp;сильно меняется в&nbsp;зависимости от:</p>
+  <ul class="steps" style="margin-top:16px">
+    <li><span class="idx">·</span><span class="txt"><strong>дисциплины</strong>&nbsp;— больше в&nbsp;социальных науках, меньше в&nbsp;технических</span></li>
+    <li><span class="idx">·</span><span class="txt"><strong>длительности</strong>&nbsp;— оптимальный диапазон 5–10 недель</span></li>
+    <li><span class="idx">·</span><span class="txt"><strong>типа знания</strong>&nbsp;— декларативное усваивается лучше, чем процедурное</span></li>
+    <li><span class="idx">·</span><span class="txt"><strong>модели обучения</strong>&nbsp;— обычный класс + ChatGPT эффективнее «перевёрнутого»</span></li>
+  </ul>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">97</div></div>
+</section>
+
+<section data-label="Центральный вывод 2.3">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Центральный вывод 2.3</div>
+  <h2 class="slide-h2">ИИ сам по&nbsp;себе не&nbsp;оказывает на&nbsp;учебные результаты <span class="accent">ни&nbsp;положительного, ни&nbsp;отрицательного</span> эффекта.</h2>
+  <p class="body-lg fg2">Эффект складывается из&nbsp;трёх вещей.</p>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">98</div></div>
+</section>
+
+<section data-label="Три составляющих">
+  <div class="head"><div class="h-l"><span>2.3 · Эффекты</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Три составляющих эффекта.</h2>
+  <ul class="steps" style="margin-top:24px">
+    <li><span class="idx">01</span><span class="txt"><strong>Режим использования инструмента</strong><br><span style="color:var(--fg-2); font-size:24px">как замена работе или как опора для&nbsp;собственной работы</span></span></li>
+    <li><span class="idx">02</span><span class="txt"><strong>Мотивационная ориентация ученика</strong><br><span style="color:var(--fg-2); font-size:24px">на&nbsp;понимание или на&nbsp;внешний результат</span></span></li>
+    <li><span class="idx">03</span><span class="txt"><strong>Устройство учебной задачи</strong><br><span style="color:var(--fg-2); font-size:24px">поощряющее тот или иной из&nbsp;этих режимов</span></span></li>
+  </ul>
+  <div class="foot"><div class="f-l">2.3 · Эффекты</div><div class="f-r">99</div></div>
+</section>
+
+<!-- ==================================================================
+     2.4 — СЕТКА ЧЕТЫРЁХ РЕЖИМОВ
+     ================================================================== -->
+<section class="subsection" data-label="2.4 Сетка">
+  <div class="head"><div class="h-l"><span>02 · Эмпирика</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="spacer"></div>
+  <div class="sub-num">2.4</div>
+  <div class="sub-title">Сетка четырёх режимов:<br>синтез эмпирических данных</div>
+  <div class="foot"><div class="f-l">02 · Эмпирика</div><div class="f-r">100</div></div>
+</section>
+
+<section data-label="Оговорка связка">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker">Прежде всего&nbsp;— оговорка</div>
+  <h2 class="slide-h2 tight">Мотивационная ориентация&nbsp;— свойство <span class="accent">не&nbsp;ученика как такового, а&nbsp;его связки с&nbsp;конкретным предметом</span>.</h2>
+  <p class="body">Один и&nbsp;тот же школьник может относиться к&nbsp;физике мастерски&nbsp;— стремиться к&nbsp;подлинному пониманию, никогда не&nbsp;списывать&nbsp;— а&nbsp;к&nbsp;биологии исключительно результативно: ему нужна хорошая оценка с&nbsp;минимумом затраченного времени.</p>
+  <p class="body-sm">Далее мы&nbsp;говорим о&nbsp;«связке ученик–предмет».</p>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">101</div></div>
+</section>
+
+<section data-label="Две оси">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Классификация строится по&nbsp;двум осям.</h2>
+  <div class="two-col" style="margin-top:48px">
+    <div>
+      <div class="col-label">Ось 1</div>
+      <div class="col-h">Мотивационная ориентация связки ученик–предмет</div>
+      <div class="col-b"><strong style="color:var(--fg)">mastery</strong>&nbsp;↔&nbsp;<strong style="color:var(--fg)">performance</strong><br><span style="font-family:'IBM Plex Mono'; font-size:18px; letter-spacing:0.06em; color:var(--fg-3); text-transform:uppercase">эмпирическая опора — Стоянов</span></div>
+    </div>
+    <div>
+      <div class="col-label">Ось 2</div>
+      <div class="col-h">Устройство учебной задачи</div>
+      <div class="col-b"><strong style="color:var(--fg)">mastery-задание</strong>&nbsp;↔&nbsp;<strong style="color:var(--fg)">performance-задание</strong><br><span style="font-family:'IBM Plex Mono'; font-size:18px; letter-spacing:0.06em; color:var(--fg-3); text-transform:uppercase">эмпирическая опора — Шмидт, Бастани</span></div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">102</div></div>
+</section>
+
+<section data-label="Ось 1 подробно">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Ось 1 · мотивационная ориентация связки ученик–предмет</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Mastery</div>
+      <div class="col-b" style="color:var(--fg); font-size:28px; line-height:1.4">Предмет важен.<br>Хочет понять материал.<br>Оценка&nbsp;— как индикатор продвижения, но&nbsp;не&nbsp;как самоцель.</div>
+    </div>
+    <div>
+      <div class="col-label">Performance</div>
+      <div class="col-b" style="color:var(--fg); font-size:28px; line-height:1.4">Предмет внешний.<br>Задача&nbsp;— получить приемлемую оценку.<br>С&nbsp;минимальными затратами.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">103</div></div>
+</section>
+
+<section data-label="Ось 2 подробно">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Ось 2 · устройство учебной задачи</div>
+  <div class="two-col" style="margin-top:32px">
+    <div>
+      <div class="col-label">Mastery-задание</div>
+      <div class="col-b" style="color:var(--fg); font-size:28px; line-height:1.4">Постановка и&nbsp;критерии подталкивают к&nbsp;разбору и&nbsp;пониманию.<br>Требует объяснения, защиты решения, демонстрации хода мысли.</div>
+    </div>
+    <div>
+      <div class="col-label">Performance-задание</div>
+      <div class="col-b" style="color:var(--fg); font-size:28px; line-height:1.4">Ценится формальный продукт.<br>Единственное, что оценивается&nbsp;— степень его правильности или красоты.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">104</div></div>
+</section>
+
+<!-- ===== ⭐ ГЛАВНЫЙ СЛАЙД — СЕТКА ===== -->
+<section data-label="СЕТКА КВАДРАНТОВ">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span><span style="color:var(--accent)">Ключевой слайд</span></div><div class="h-r">Четыре режима использования ИИ</div></div>
+  <div class="rule"></div>
+  <div class="quadrant-wrap">
+    <div class="q-y-label">
+      <div class="y-top">↑ mastery</div>
+      <div class="y-mid">ориентация ученика</div>
+      <div class="y-bot">↓ performance</div>
+    </div>
+    <div class="q-grid">
+      <div class="q-cell">
+        <div>
+          <div class="q-tag">Q1 · M&nbsp;×&nbsp;M</div>
+          <div class="q-name">Идеальный случай</div>
+        </div>
+        <div class="q-desc">ИИ работает чисто инструментально: объяснение, разбор, проверка. Снимает непродуктивную нагрузку.</div>
+      </div>
+      <div class="q-cell">
+        <div>
+          <div class="q-tag">Q2 · M&nbsp;×&nbsp;P</div>
+          <div class="q-name">Напряжённая ситуация</div>
+        </div>
+        <div class="q-desc">Хочет понимать, но&nbsp;задание не&nbsp;требует. ИИ как репетитор параллельно + формальный продукт на&nbsp;сдачу.</div>
+      </div>
+      <div class="q-cell">
+        <div>
+          <div class="q-tag">Q3 · P&nbsp;×&nbsp;M</div>
+          <div class="q-name">Задание вытягивает</div>
+        </div>
+        <div class="q-desc">Подходит к&nbsp;предмету формально, но&nbsp;задание построено так, что формально его не&nbsp;сдать. Шмидт: тип задания вытягивает ученика.</div>
+      </div>
+      <div class="q-cell q4">
+        <div>
+          <div class="q-tag">Q4 · P&nbsp;×&nbsp;P</div>
+          <div class="q-name">«Списывание»</div>
+        </div>
+        <div class="q-desc">Нет мотивации понимать. Задание не&nbsp;требует понимания. Инструмент позволяет выдать продукт без работы.</div>
+      </div>
+    </div>
+    <div class="q-x-spacer"></div>
+    <div class="q-x-label">
+      <span>← mastery</span>
+      <span class="x-mid">устройство задания</span>
+      <span>performance →</span>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">105</div></div>
+</section>
+
+<!-- ===== РАЗБОР КАЖДОГО КВАДРАНТА ===== -->
+<section class="q-single" data-label="Q1 разбор">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="q-axes">Ориентация: <span class="ax-val">mastery</span> &nbsp;×&nbsp; Задание: <span class="ax-val">mastery</span></div>
+  <h2><span class="q-id">Q1</span>Идеальный случай</h2>
+  <div class="q-sub">Ученику предмет важен. Задание построено так, чтобы поощрять понимание, а&nbsp;не&nbsp;формальный результат.</div>
+  <div class="q-body">
+    <p>ИИ работает <strong>чисто инструментально</strong>: ученик обращается к&nbsp;нейросети за&nbsp;объяснением, разбором незнакомого аргумента, проверкой собственного решения.</p>
+    <p>Нейросеть снимает с&nbsp;него непродуктивную нагрузку и&nbsp;освобождает ресурсы для&nbsp;собственной работы&nbsp;— той самой, в&nbsp;которой формируется знание.</p>
+  </div>
+  <div class="q-empirics">Эмпирически — студенты у&nbsp;Стоянова с&nbsp;высокой mastery-ориентацией и&nbsp;низкой частотой обращения к&nbsp;ChatGPT</div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">106</div></div>
+</section>
+
+<section class="q-single" data-label="Q2 разбор">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="q-axes">Ориентация: <span class="ax-val">mastery</span> &nbsp;×&nbsp; Задание: <span class="ax-val">performance</span></div>
+  <h2><span class="q-id">Q2</span>Напряжённая ситуация</h2>
+  <div class="q-sub">Ученик хочет понимать предмет&nbsp;— но&nbsp;задание этого не&nbsp;требует, оно требует только формального продукта.</div>
+  <div class="q-body">
+    <p>Возникает противоречие между тем, ради чего ученик пришёл в&nbsp;этот предмет, и&nbsp;тем, как сейчас устроен учебный эпизод.</p>
+    <p><strong>Рабочая разрешимость:</strong> ученик использует ИИ как репетитора параллельно&nbsp;— для&nbsp;собственного понимания, а&nbsp;на&nbsp;сдачу выдаёт тот формальный продукт, который требуется.</p>
+    <p class="fg2">ИИ обслуживает обе цели: внешнюю (закрыть задание) и&nbsp;внутреннюю (разобраться).</p>
+  </div>
+  <div class="q-empirics">Эмпирических исследований именно этого квадранта мало, но&nbsp;логика собранных данных делает такое разрешение правдоподобным</div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">107</div></div>
+</section>
+
+<section class="q-single" data-label="Q3 разбор">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="q-axes">Ориентация: <span class="ax-val">performance</span> &nbsp;×&nbsp; Задание: <span class="ax-val">mastery</span></div>
+  <h2><span class="q-id">Q3</span>Самый интересный для&nbsp;педагогики</h2>
+  <div class="q-sub">Ученик подходит к&nbsp;предмету формально&nbsp;— но&nbsp;задание построено так, что формально его не&nbsp;сдать.</div>
+  <div class="q-body">
+    <p>Эксперимент Шмидта: студенты в&nbsp;мастерском условии проявляли мастерское поведение в&nbsp;работе с&nbsp;ChatGPT даже тогда, когда индивидуально были скорее ориентированы на&nbsp;результат.</p>
+    <p><strong>Тип задания может вытянуть ученика из&nbsp;его исходной ориентации</strong> — по&nbsp;крайней мере на&nbsp;время этого задания.</p>
+    <p class="fg2">Это та&nbsp;переменная, в&nbsp;которую учитель может вкладываться.</p>
+  </div>
+  <div class="q-empirics">Прямая эмпирическая опора — эксперимент Шмидта · 2025</div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">108</div></div>
+</section>
+
+<section class="q-single" data-label="Q4 разбор">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="q-axes">Ориентация: <span class="ax-val">performance</span> &nbsp;×&nbsp; Задание: <span class="ax-val">performance</span></div>
+  <h2><span class="q-id">Q4</span>То, что называют «списыванием»</h2>
+  <div class="q-sub">У&nbsp;ученика нет мотивации понимать. Задание не&nbsp;требует понимания. Инструмент позволяет выдать продукт без работы.</div>
+  <div class="q-body">
+    <p>Здесь критическое отношение общества к&nbsp;ИИ <strong>принципиально справедливо</strong>.</p>
+    <p class="fg2">Но&nbsp;и&nbsp;здесь нужно сделать две оговорки.</p>
+  </div>
+  <div class="q-empirics">Дальше — две оговорки к&nbsp;Q4</div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">109</div></div>
+</section>
+
+<section data-label="Q4 оговорки">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Две оговорки к&nbsp;Q4.</h2>
+  <ul class="steps" style="margin-top:24px">
+    <li><span class="idx">01</span><span class="txt"><strong>Эта стратегия эмпирически не&nbsp;нова.</strong><br><span style="color:var(--fg-2); font-size:24px; line-height:1.4">Ученики этого квадранта пользовались ГДЗ, списывали у&nbsp;одноклассников, заказывали рефераты задолго до&nbsp;ChatGPT. Общий уровень нечестности с&nbsp;его появлением не&nbsp;вырос.</span></span></li>
+    <li><span class="idx">02</span><span class="txt"><strong>Общественная критика ИИ как такового методологически промахивается мимо цели.</strong><br><span style="color:var(--fg-2); font-size:24px; line-height:1.4">Из&nbsp;четырёх квадрантов её&nbsp;претензии адресны только к&nbsp;одному.</span></span></li>
+  </ul>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">110</div></div>
+</section>
+
+<section data-label="Три из четырёх">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">Из&nbsp;четырёх квадрантов <span class="accent">три нейтральны или продуктивны</span>.</h2>
+  <p class="body-lg fg2">Проблема&nbsp;— не&nbsp;в&nbsp;инструменте, а&nbsp;в&nbsp;обстоятельствах, помещающих ученика в&nbsp;Q4.</p>
+  <div class="callout">
+    <p class="body">Бороться с&nbsp;инструментом — значит лечить симптом, не&nbsp;касаясь причины.</p>
+  </div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">111</div></div>
+</section>
+
+<section data-label="Практическая рекомендация">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="kicker accent">Практическая рекомендация</div>
+  <h2 class="slide-h2 tight">Мотивационная ориентация&nbsp;— в&nbsp;значительной мере вне власти учителя.</h2>
+  <h2 class="slide-h2" style="margin-top:24px">Устройство задания&nbsp;— <span class="accent">целиком в&nbsp;его руках</span>.</h2>
+  <p class="body fg2">Главный рычаг работы с&nbsp;режимом использования ИИ в&nbsp;классе — не&nbsp;запрет инструмента, не&nbsp;отслеживающие программы, не&nbsp;апелляция к&nbsp;академической честности&nbsp;— а&nbsp;<strong style="color:var(--fg)">конструкция самого задания</strong>.</p>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">112</div></div>
+</section>
+
+<section data-label="Какое задание">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="two-col">
+    <div>
+      <div class="col-label">Задание-результат</div>
+      <div class="col-b" style="color:var(--fg); font-size:26px; line-height:1.4">Спрашивает результат и&nbsp;только результат. Ставит ученика&nbsp;— любого&nbsp;— в&nbsp;положение, в&nbsp;котором результат проще всего получить через делегирование.</div>
+    </div>
+    <div>
+      <div class="col-label" style="color:var(--accent)">Задание-работа</div>
+      <div class="col-b" style="color:var(--fg); font-size:26px; line-height:1.4">Спрашивает работу мысли, защиту решения, разбор альтернатив. Переводит ученика&nbsp;— снова любого&nbsp;— в&nbsp;режим, в&nbsp;котором ИИ работает как опора, а&nbsp;не&nbsp;как замена.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">113</div></div>
+</section>
+
+<section data-label="Не открытие">
+  <div class="head"><div class="h-l"><span>2.4 · Сетка</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2">В&nbsp;сущности, это <span class="accent">не&nbsp;открытие</span>.</h2>
+  <p class="body-lg">Качественные задания всегда побуждали к&nbsp;качественной работе.</p>
+  <p class="body-lg fg2">ИИ не&nbsp;отменил этого правила и&nbsp;не&nbsp;упростил его&nbsp;— а&nbsp;лишь сделал его выполнение более срочным.</p>
+  <div class="foot"><div class="f-l">2.4 · Сетка</div><div class="f-r">114</div></div>
+</section>
+
+<!-- ==================================================================
+     03 · РАЗДЕЛИТЕЛЬ — ЗАКЛЮЧЕНИЕ
+     ================================================================== -->
+<section class="divider" data-label="03 Заключение">
+  <div class="d-label">Часть третья</div>
+  <div class="d-num">03</div>
+  <div class="d-title">Заключение</div>
+</section>
+
+<section data-label="Выводы">
+  <div class="head"><div class="h-l"><span>03 · Заключение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <h2 class="slide-h2 tight">Четыре вывода.</h2>
+  <p class="body fg2">Анализ международных научных публикаций и&nbsp;опросных исследований за&nbsp;2022–2026 годы позволяет сделать следующее.</p>
+  <div class="foot"><div class="f-l">03 · Заключение</div><div class="f-r">116</div></div>
+</section>
+
+<section data-label="Вывод 1">
+  <div class="head"><div class="h-l"><span>03 · Заключение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="conclusion-num">Вывод 01</div>
+  <div class="conclusion-h">Общий уровень академической нечестности <span class="accent">не&nbsp;вырос</span> с&nbsp;появлением ChatGPT.</div>
+  <p class="body fg2">Списывание было массовым задолго до&nbsp;2022 года&nbsp;— приблизительно те&nbsp;же две трети учащихся признавались в&nbsp;нём и&nbsp;пятнадцать лет назад. Распространение ИИ дало уже существовавшим практикам ещё один инструмент, но&nbsp;не&nbsp;создало нового социального явления.</p>
+  <div class="foot"><div class="f-l">03 · Заключение</div><div class="f-r">117</div></div>
+</section>
+
+<section data-label="Вывод 2">
+  <div class="head"><div class="h-l"><span>03 · Заключение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="conclusion-num">Вывод 02</div>
+  <div class="conclusion-h">Реальное использование ИИ учащимися имеет <span class="accent">разнообразный характер</span>.</div>
+  <p class="body fg2">Режим, при&nbsp;котором ИИ замещает выполнение задания целиком, составляет меньшинство случаев. Преобладают режимы объяснения материала, формирования предварительного представления о&nbsp;теме, структурирования конспектов и&nbsp;поддержки написания.</p>
+  <div class="foot"><div class="f-l">03 · Заключение</div><div class="f-r">118</div></div>
+</section>
+
+<section data-label="Вывод 3">
+  <div class="head"><div class="h-l"><span>03 · Заключение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="conclusion-num">Вывод 03 · центральный</div>
+  <div class="conclusion-h">Эффект ИИ на&nbsp;учебные результаты <span class="accent">принципиально неоднороден</span>.</div>
+  <p class="body">Один и&nbsp;тот же инструмент, применённый к&nbsp;одной и&nbsp;той же группе учеников, на&nbsp;одном и&nbsp;том же материале, приводит к&nbsp;противоположным результатам в&nbsp;зависимости от&nbsp;того, как он&nbsp;встроен в&nbsp;учебный процесс.</p>
+  <p class="body-sm">— Бастани и&nbsp;соавт. · PNAS 2025</p>
+  <div class="foot"><div class="f-l">03 · Заключение</div><div class="f-r">119</div></div>
+</section>
+
+<section data-label="Вывод 4">
+  <div class="head"><div class="h-l"><span>03 · Заключение</span></div><div class="h-r"></div></div>
+  <div class="rule"></div>
+  <div class="conclusion-num">Вывод 04</div>
+  <div class="conclusion-h">Исходная гипотеза работы в&nbsp;её&nbsp;эмпирической части <span class="accent">подтверждается</span>.</div>
+  <p class="body fg2">ИИ сам по&nbsp;себе не&nbsp;есть ни&nbsp;причина учебных проблем, ни&nbsp;их&nbsp;решение. Он&nbsp;усиливает уже существующие у&nbsp;ученика установки и&nbsp;работает по&nbsp;линии того, как устроена конкретная учебная задача.</p>
+  <div class="foot"><div class="f-l">03 · Заключение</div><div class="f-r">120</div></div>
+</section>
+
+<!-- ==================================================================
+     ФИНАЛЬНЫЙ СЛАЙД
+     ================================================================== -->
+<section class="final-slide" data-label="Спасибо">
+  <div class="spacer"></div>
+  <div class="thanks">Спасибо<br>за&nbsp;<em>внимание</em>.</div>
+  <div class="sig">XXXXXXX · 10&nbsp;класс · 2026 · готов к&nbsp;вопросам</div>
+  <div class="spacer"></div>
+</section>
+
+</deck-stage>
+
+<script>
+/**
+ * <deck-stage> — reusable web component for HTML decks.
+ *
+ * Handles:
+ *  (a) speaker notes — reads <script type="application/json" id="speaker-notes">
+ *      and posts {slideIndexChanged: N} to the parent window on nav.
+ *  (b) keyboard navigation — ←/→, PgUp/PgDn, Space, Home/End, number keys.
+ *      On touch devices, tapping the left/right half of the stage goes
+ *      prev/next — taps on links, buttons and other interactive slide
+ *      content are left alone.
+ *  (c) press R to reset to slide 0 (with a tasteful keyboard hint).
+ *  (d) bottom-center overlay showing slide count + hints, fades out on idle.
+ *  (e) auto-scaling — inner canvas is a fixed design size (default 1920×1080)
+ *      scaled with `transform: scale()` to fit the viewport, letterboxed.
+ *      Set the `noscale` attribute to render at authored size (1:1) — the
+ *      PPTX exporter sets this so its DOM capture sees unscaled geometry.
+ *  (f) print — `@media print` lays every slide out as its own page at the
+ *      design size, so the browser's Print → Save as PDF produces a clean
+ *      one-page-per-slide PDF with no extra setup.
+ *  (g) thumbnail rail — resizable left-hand column of per-slide thumbnails
+ *      (static clones). Click to navigate; ↑/↓ with a thumbnail focused to
+ *      step between slides; drag to reorder; right-click for
+ *      Skip / Move up / Move down / Delete (opens a Cancel/Delete confirm
+ *      dialog). Drag the rail's right edge to resize; width persists to
+ *      localStorage. Skipped slides carry `data-deck-skip`, are dimmed in
+ *      the rail, omitted from prev/next navigation, and hidden at print.
+ *      The rail is suppressed in presenting mode, in the host's Preview
+ *      mode (ViewerMode='none'), on `noscale`, on narrow viewports
+ *      (≤640px), and via the `no-rail` attribute. Rail mutations dispatch
+ *      a `deckchange`
+ *      CustomEvent on the element: detail = {action, from, to, slide}.
+ *
+ * Slides are HIDDEN, not unmounted. Non-active slides stay in the DOM with
+ * `visibility: hidden` + `opacity: 0`, so their state (videos, iframes,
+ * form inputs, React trees) is preserved across navigation.
+ *
+ * Lifecycle event — the component dispatches a `slidechange` CustomEvent on
+ * itself whenever the active slide changes (including the initial mount).
+ * The event bubbles and composes out of shadow DOM, so you can listen on
+ * the <deck-stage> element or on document:
+ *
+ *   document.querySelector('deck-stage').addEventListener('slidechange', (e) => {
+ *     e.detail.index         // new 0-based index
+ *     e.detail.previousIndex // previous index, or -1 on init
+ *     e.detail.total         // total slide count
+ *     e.detail.slide         // the new active slide element
+ *     e.detail.previousSlide // the prior slide element, or null on init
+ *     e.detail.reason        // 'init' | 'keyboard' | 'click' | 'tap' | 'api'
+ *   });
+ *
+ * Persistence: none at the deck level. The host app keeps the current slide
+ * in its own URL (?slide=) and re-delivers it via location.hash on load, so a
+ * bare load with no hash always starts at slide 1.
+ *
+ * Usage:
+ *   <style>deck-stage:not(:defined){visibility:hidden}</style>
+ *   <deck-stage width="1920" height="1080">
+ *     <section data-label="Title">...</section>
+ *     <section data-label="Agenda">...</section>
+ *   </deck-stage>
+ *   <script src="deck-stage.js"><\/script>
+ *
+ * The :not(:defined) rule prevents a flash of the first slide at its
+ * authored styles before this script runs and attaches the shadow root.
+ *
+ * Slides are the direct element children of <deck-stage>. Each slide is
+ * automatically tagged with:
+ *   - data-screen-label="NN Label"   (1-indexed, for comment flow)
+ *   - data-om-validate="no_overflowing_text,no_overlapping_text,slide_sized_text"
+ */
+
+(() => {
+  const DESIGN_W_DEFAULT = 1920;
+  const DESIGN_H_DEFAULT = 1080;
+  const OVERLAY_HIDE_MS = 1800;
+  const VALIDATE_ATTR = 'no_overflowing_text,no_overlapping_text,slide_sized_text';
+  const FINE_POINTER_MQ = matchMedia('(hover: hover) and (pointer: fine)');
+  const NARROW_MQ = matchMedia('(max-width: 640px)');
+  // Slide-authored controls that should keep a tap instead of it navigating.
+  const INTERACTIVE_SEL = 'a[href], button, input, select, textarea, summary, label, video[controls], audio[controls], [role="button"], [onclick], [tabindex]:not([tabindex^="-"]), [contenteditable]:not([contenteditable="false" i])';
+
+  const pad2 = (n) => String(n).padStart(2, '0');
+
+  // Label precedence: data-label → data-screen-label (number stripped) → first heading → "Slide".
+  const getSlideLabel = (el) => {
+    const explicit = el.getAttribute('data-label');
+    if (explicit) return explicit;
+
+    const existing = el.getAttribute('data-screen-label');
+    if (existing) return existing.replace(/^\s*\d+\s*/, '').trim() || existing;
+
+    const h = el.querySelector('h1, h2, h3, [data-title]');
+    const t = h && (h.textContent || '').trim().slice(0, 40);
+    if (t) return t;
+
+    return 'Slide';
+  };
+
+  const stylesheet = `
+    :host {
+      position: fixed;
+      inset: 0;
+      display: block;
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* connectedCallback holds this until document.fonts.ready (capped 2s) so
+     * the first visible paint has the deck's real typography + final rail
+     * layout. opacity (not visibility) so the active slide can't un-hide
+     * itself via the ::slotted([data-deck-active]) visibility:visible rule.
+     * Only the stage/rail hide — the black :host background stays, so the
+     * iframe doesn't flash the page's default white. */
+    :host([data-fonts-pending]) .stage,
+    :host([data-fonts-pending]) .rail { opacity: 0; pointer-events: none; }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .canvas {
+      position: relative;
+      transform-origin: center center;
+      flex-shrink: 0;
+      background: #fff;
+      will-change: transform;
+    }
+
+    /* Slides live in light DOM (via <slot>) so authored CSS still applies.
+       We absolutely position each slotted child to stack them. */
+    ::slotted(*) {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+    ::slotted([data-deck-active]) {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .overlay {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translate(-50%, 6px) scale(0.92);
+      filter: blur(6px);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      background: #000;
+      color: #fff;
+      border-radius: 999px;
+      font-size: 12px;
+      font-feature-settings: "tnum" 1;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.8,.2,1), filter 260ms ease;
+      transform-origin: center bottom;
+      z-index: 2147483000;
+      user-select: none;
+    }
+    .overlay[data-visible] {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0) scale(1);
+      filter: blur(0);
+    }
+
+    .btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 999px;
+      color: rgba(255,255,255,0.72);
+      transition: background 140ms ease, color 140ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .btn:active { background: rgba(255,255,255,0.18); }
+    .btn:focus { outline: none; }
+    .btn:focus-visible { outline: none; }
+    .btn::-moz-focus-inner { border: 0; }
+    .btn svg { width: 14px; height: 14px; display: block; }
+    .btn.reset {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 0 10px 0 12px;
+      gap: 6px;
+      color: rgba(255,255,255,0.72);
+    }
+    .btn.reset .kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 10px;
+      line-height: 1;
+      color: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.12);
+      border-radius: 4px;
+    }
+
+    .count {
+      font-variant-numeric: tabular-nums;
+      color: #fff;
+      font-weight: 500;
+      padding: 0 8px;
+      min-width: 42px;
+      text-align: center;
+      font-size: 12px;
+    }
+    .count .sep { color: rgba(255,255,255,0.45); margin: 0 3px; font-weight: 400; }
+    .count .total { color: rgba(255,255,255,0.55); }
+
+    .divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(255,255,255,0.18);
+      margin: 0 2px;
+    }
+
+    /* ── Thumbnail rail ──────────────────────────────────────────────────
+       Fixed column on the left; each thumbnail is a static deep-clone of
+       the light-DOM slide scaled into a 16:9 (or design-aspect) frame. The
+       stage re-fits around it (see _fit); hidden during present / noscale
+       / print so capture geometry and fullscreen output are unchanged. */
+    .rail {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--deck-rail-w, 188px);
+      background: #141414;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 12px 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 2147482500;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.18) transparent;
+    }
+    .rail::-webkit-scrollbar { width: 8px; }
+    .rail::-webkit-scrollbar-track { background: transparent; margin: 2px; }
+    .rail::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.18);
+      border-radius: 4px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+    .rail::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.28);
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+    :host([no-rail]) .rail,
+    :host([noscale]) .rail { display: none; }
+    .rail[data-presenting] { display: none; }
+    @media (max-width: 640px) {
+      .rail, .rail-resize { display: none; }
+    }
+    /* User-driven show/hide (the TweaksPanel toggle) slides instead of
+       popping. Transitions are gated on :host([data-rail-anim]) — set only
+       for the 200ms around the toggle — so window-resize and rail-width
+       drag (which also call _fit) don't lag behind the cursor. */
+    .rail[data-user-hidden] { transform: translateX(-100%); }
+    :host([data-rail-anim]) .rail { transition: transform 200ms cubic-bezier(.3,.7,.4,1); }
+    :host([data-rail-anim]) .stage { transition: left 200ms cubic-bezier(.3,.7,.4,1); }
+    :host([data-rail-anim]) .canvas { transition: transform 200ms cubic-bezier(.3,.7,.4,1); }
+    /* transition shorthand replaces rather than merges — repeat the base
+       .overlay opacity/transform/filter transitions so visibility changes
+       during the 200ms toggle window still fade instead of popping. */
+    :host([data-rail-anim]) .overlay {
+      transition: margin-left 200ms cubic-bezier(.3,.7,.4,1),
+                  opacity 260ms ease,
+                  transform 260ms cubic-bezier(.2,.8,.2,1),
+                  filter 260ms ease;
+    }
+
+    .thumb {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .thumb .num {
+      width: 16px;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 500;
+      text-align: right;
+      color: rgba(255,255,255,0.55);
+      padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .thumb .frame {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+      aspect-ratio: var(--deck-aspect);
+      background: #fff;
+      border-radius: 4px;
+      outline: 2px solid transparent;
+      outline-offset: 0;
+      overflow: hidden;
+      transition: outline-color 120ms ease;
+    }
+    .thumb:hover .frame { outline-color: rgba(255,255,255,0.25); }
+    .thumb { outline: none; }
+    .thumb:focus-visible .frame { outline-color: rgba(255,255,255,0.5); }
+    .thumb[data-current] .num { color: #fff; }
+    .thumb[data-current] .frame { outline-color: #D97757; }
+    .thumb[data-dragging] { opacity: 0.35; }
+    .thumb::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      right: 0;
+      height: 3px;
+      border-radius: 2px;
+      background: #D97757;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .thumb[data-drop="before"]::before { top: -8px; opacity: 1; }
+    .thumb[data-drop="after"]::before { bottom: -8px; opacity: 1; }
+    .thumb[data-skip] .frame { opacity: 0.35; }
+    .thumb[data-skip] .frame::after {
+      content: 'Skipped';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .ctxmenu {
+      position: fixed;
+      min-width: 150px;
+      padding: 4px;
+      background: #242424;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 7px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      z-index: 2147483100;
+      display: none;
+      font-size: 12px;
+    }
+    .ctxmenu[data-open] { display: block; }
+    .ctxmenu button {
+      display: block;
+      width: 100%;
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #e8e8e8;
+      font: inherit;
+      text-align: left;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .ctxmenu button:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
+    .ctxmenu button:disabled { opacity: 0.35; cursor: default; }
+    .ctxmenu hr {
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 4px 2px;
+    }
+
+    .rail-resize {
+      position: fixed;
+      left: calc(var(--deck-rail-w, 188px) - 3px);
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      cursor: col-resize;
+      z-index: 2147482600;
+      touch-action: none;
+    }
+    .rail-resize:hover,
+    .rail-resize[data-dragging] { background: rgba(255,255,255,0.12); }
+    :host([no-rail]) .rail-resize,
+    :host([noscale]) .rail-resize,
+    .rail[data-presenting] + .rail-resize,
+    .rail[data-user-hidden] + .rail-resize { display: none; }
+
+    /* Delete-confirm popup — matches the SPA's ConfirmDialog layout
+       (title + message body, depressed footer with Cancel / Delete). */
+    .confirm-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 2147483200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .confirm-backdrop[data-open] { display: flex; }
+    .confirm {
+      width: 320px;
+      max-width: calc(100vw - 32px);
+      background: #2a2a2a;
+      color: #e8e8e8;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+      overflow: hidden;
+      font-family: inherit;
+      animation: deck-confirm-in 0.18s ease;
+    }
+    @keyframes deck-confirm-in {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .confirm .body { padding: 20px 20px 16px; }
+    .confirm .title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .confirm .msg { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.65); }
+    .confirm .footer {
+      padding: 14px 20px;
+      background: #1f1f1f;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .confirm button {
+      appearance: none;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .confirm .cancel {
+      background: transparent;
+      border: 0;
+      color: rgba(255,255,255,0.8);
+    }
+    .confirm .cancel:hover { background: rgba(255,255,255,0.08); }
+    .confirm .danger {
+      background: #c96442;
+      border: 1px solid rgba(0,0,0,0.15);
+      color: #fff;
+      box-shadow: 0 1px 3px rgba(166,50,68,0.3), 0 2px 6px rgba(166,50,68,0.18);
+    }
+    .confirm .danger:hover { background: #b5563a; }
+
+    /* ── Print: one page per slide, no chrome ────────────────────────────
+       The screen layout stacks every slide at inset:0 inside a scaled
+       canvas; for print we want them in document flow at the authored
+       design size so the browser paginates one slide per sheet. The
+       @page size is set from the width/height attributes via the inline
+       <style id="deck-stage-print-page"> that connectedCallback injects
+       into <head> (the @page at-rule has no effect inside shadow DOM). */
+    @media print {
+      :host {
+        position: static;
+        inset: auto;
+        background: none;
+        overflow: visible;
+        color: inherit;
+      }
+      .stage { position: static; display: block; }
+      .canvas {
+        transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        background: none;
+        will-change: auto;
+      }
+      ::slotted(*) {
+        position: relative !important;
+        inset: auto !important;
+        width: var(--deck-design-w) !important;
+        height: var(--deck-design-h) !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto;
+        break-after: page;
+        page-break-after: always;
+        break-inside: avoid;
+        overflow: hidden;
+      }
+      /* :last-child alone isn't enough once data-deck-skip hides the
+         trailing slide(s) — the last *visible* slide still carries
+         break-after:page and prints a blank sheet. _markLastVisible()
+         maintains data-deck-last-visible on the last non-skipped slide. */
+      ::slotted(*:last-child),
+      ::slotted([data-deck-last-visible]) {
+        break-after: auto;
+        page-break-after: auto;
+      }
+      ::slotted([data-deck-skip]) { display: none !important; }
+      .overlay, .rail, .rail-resize, .ctxmenu, .confirm-backdrop { display: none !important; }
+    }
+  `;
+
+  class DeckStage extends HTMLElement {
+    static get observedAttributes() { return ['width', 'height', 'noscale', 'no-rail']; }
+
+    constructor() {
+      super();
+      this._root = this.attachShadow({ mode: 'open' });
+      this._index = 0;
+      this._slides = [];
+      this._notes = [];
+      this._hideTimer = null;
+      this._mouseIdleTimer = null;
+      this._menuIndex = -1;
+
+      this._onKey = this._onKey.bind(this);
+      this._onResize = this._onResize.bind(this);
+      this._onSlotChange = this._onSlotChange.bind(this);
+      this._onMouseMove = this._onMouseMove.bind(this);
+      this._onTap = this._onTap.bind(this);
+      this._onMessage = this._onMessage.bind(this);
+      // Capture-phase close so a click anywhere dismisses the menu, but
+      // ignore clicks that land inside the menu itself — otherwise the
+      // capture handler runs before the menu's own (bubble) handler and
+      // clears _menuIndex out from under it.
+      this._onDocClick = (e) => {
+        if (this._menu && e.composedPath && e.composedPath().includes(this._menu)) return;
+        this._closeMenu();
+      };
+    }
+
+    get designWidth() {
+      return parseInt(this.getAttribute('width'), 10) || DESIGN_W_DEFAULT;
+    }
+    get designHeight() {
+      return parseInt(this.getAttribute('height'), 10) || DESIGN_H_DEFAULT;
+    }
+
+    connectedCallback() {
+      // Presenter-view popup loads deckUrl?_snthumb=...#N for its prev/cur/
+      // next thumbnails — the rail has no business rendering inside those
+      // (wrong scale, and it offsets the stage so the thumb shows a gutter).
+      if (/[?&]_snthumb=/.test(location.search)) this.setAttribute('no-rail', '');
+      this._render();
+      this._loadNotes();
+      this._syncPrintPageRule();
+      window.addEventListener('keydown', this._onKey);
+      window.addEventListener('resize', this._onResize);
+      window.addEventListener('mousemove', this._onMouseMove, { passive: true });
+      window.addEventListener('message', this._onMessage);
+      window.addEventListener('click', this._onDocClick, true);
+      this.addEventListener('click', this._onTap);
+      // Initial collection + layout happens via slotchange, which fires on mount.
+      this._enableRail();
+      // Hold the stage hidden until webfonts are ready so the first visible
+      // paint has the deck's real typography — the :not(:defined) guard in
+      // the page HTML only covers custom-element upgrade, not font load.
+      // Capped so a 404'd font URL can't blank the deck indefinitely.
+      this.setAttribute('data-fonts-pending', '');
+      const reveal = () => this.removeAttribute('data-fonts-pending');
+      // rAF first: fonts.ready is a pre-resolved promise until layout has
+      // resolved the slotted text's font-family and pushed a FontFace into
+      // 'loading'. Reading it here in connectedCallback (parse-time) would
+      // settle the race in a microtask before any font fetch starts.
+      requestAnimationFrame(() => {
+        Promise.race([
+          document.fonts ? document.fonts.ready : Promise.resolve(),
+          new Promise((r) => setTimeout(r, 2000)),
+        ]).then(reveal, reveal);
+      });
+    }
+
+    _enableRail() {
+      // Idempotent — older host builds still post __omelette_rail_enabled.
+      // no-rail guard keeps the observers/stylesheet walk off the cheap path
+      // for presenter-popup thumbnail iframes (up to 9 per view).
+      if (this._railEnabled || this.hasAttribute('no-rail')) return;
+      this._railEnabled = true;
+      // Per-viewer preference — restored alongside rail width. Default on;
+      // only a stored '0' (from the TweaksPanel toggle) hides it.
+      this._railVisible = true;
+      try {
+        if (localStorage.getItem('deck-stage.railVisible') === '0') this._railVisible = false;
+      } catch (e) {}
+      // Live thumbnail updates: watch the light-DOM slides for content
+      // edits and re-clone just the affected thumb(s), debounced. Ignore
+      // the data-deck-* / data-screen-label / data-om-validate attributes
+      // this component itself writes so nav and skip don't trigger
+      // spurious refreshes.
+      const OWN_ATTRS = /^data-(deck-|screen-label$|om-validate$)/;
+      this._liveDirty = new Set();
+      this._liveObserver = new MutationObserver((records) => {
+        for (const r of records) {
+          if (r.type === 'attributes' && OWN_ATTRS.test(r.attributeName || '')) continue;
+          let n = r.target;
+          while (n && n.parentElement !== this) n = n.parentElement;
+          if (n && this._slideSet && this._slideSet.has(n)) this._liveDirty.add(n);
+        }
+        if (this._liveDirty.size && !this._liveTimer) {
+          this._liveTimer = setTimeout(() => {
+            this._liveTimer = null;
+            this._liveDirty.forEach((s) => this._refreshThumb(s));
+            this._liveDirty.clear();
+          }, 200);
+        }
+      });
+      this._liveObserver.observe(this, {
+        subtree: true, childList: true, characterData: true, attributes: true,
+      });
+      // Lazy thumbnail materialization — clone the slide only when its
+      // frame scrolls into (or near) the rail viewport. rootMargin gives
+      // ~4 thumbs of pre-load so fast scrolling doesn't flash blanks.
+      this._railObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && e.target.__deckThumb) {
+            this._materialize(e.target.__deckThumb);
+          }
+        });
+      }, { root: this._rail, rootMargin: '400px 0px' });
+      // Tweaks typically change CSS vars / attrs OUTSIDE <deck-stage>
+      // (on <html>, <body>, a wrapper div, or a <style> tag), which
+      // _liveObserver can't see. Re-snapshot author CSS (constructable
+      // sheet is shared by reference, so one replaceSync updates every
+      // thumb shadow root) and re-sync each thumb host's attrs + custom
+      // properties. In-slide DOM mutations are _liveObserver's job.
+      // Debounced so slider drags don't thrash.
+      this._onTweakChange = () => {
+        clearTimeout(this._tweakTimer);
+        this._tweakTimer = setTimeout(() => {
+          this._snapshotAuthorCss();
+          // One getComputedStyle for the whole batch — each
+          // getPropertyValue read below reuses the same computed style
+          // as long as nothing invalidates layout between thumbs.
+          const cs = getComputedStyle(this);
+          (this._thumbs || []).forEach((t) => {
+            if (t.host) this._syncThumbHostAttrs(t.host, cs);
+          });
+        }, 120);
+      };
+      window.addEventListener('tweakchange', this._onTweakChange);
+      this._snapshotAuthorCss();
+      // Build the rail now that it's enabled — slotchange already fired,
+      // so _renderRail's early-return skipped the initial build.
+      this._syncRailHidden();
+      this._renderRail();
+      this._fit();
+    }
+
+    /** Snapshot document stylesheets into a constructable sheet that each
+     *  thumbnail's nested shadow root adopts — so author CSS styles the
+     *  cloned slide content without touching this component's chrome.
+     *  Cross-origin sheets throw on .cssRules — skip them. Re-callable:
+     *  the existing constructable sheet is reused via replaceSync so every
+     *  already-adopted shadow root picks up the fresh CSS without re-adopt. */
+    _snapshotAuthorCss() {
+      // :root in an adopted sheet inside a shadow root matches nothing
+      // (only the document root qualifies), so author rules like
+      // `:root[data-voice="modern"] .serif` never reach the clones.
+      // Rewrite :root → :host and mirror <html>'s data-*/class/lang onto
+      // each thumb host (see _syncThumbHostAttrs) so the same selectors
+      // match inside the thumbnail's shadow tree.
+      const authorCss = Array.from(document.styleSheets).map((sh) => {
+        try {
+          return Array.from(sh.cssRules).map((r) => r.cssText).join('\n');
+        } catch (e) { return ''; }
+      }).join('\n')
+        // The shadow host is featureless outside the functional :host(...)
+        // form, so any compound on :root — [attr], .class, #id, :pseudo —
+        // must become :host(<compound>) not :host<compound>. Same for the
+        // html type selector (Tailwind class-strategy dark mode emits
+        // html.dark; Pico uses html[data-theme]), which has nothing to
+        // match inside the thumb's shadow tree.
+        .replace(/:root((?:\[[^\]]*\]|[.#][-\w]+|:[-\w]+(?:\([^)]*\))?)+)/g, ':host($1)')
+        .replace(/:root\b/g, ':host')
+        .replace(/(^|[\s,>~+(}])html((?:\[[^\]]*\]|[.#][-\w]+|:[-\w]+(?:\([^)]*\))?)+)(?![-\w])/g, '$1:host($2)')
+        .replace(/(^|[\s,>~+(}])html(?![-\w])/g, '$1:host');
+      // Every custom property the author references. _syncThumbHostAttrs
+      // mirrors each one's *computed* value at <deck-stage> onto the
+      // thumb host so the live value wins over the :host default above
+      // regardless of which ancestor the tweak wrote to (<html>, <body>,
+      // a wrapper div, or the deck-stage element itself all inherit
+      // down to getComputedStyle(this)).
+      this._authorVars = new Set(authorCss.match(/--[\w-]+/g) || []);
+      try {
+        if (!this._adoptedSheet) this._adoptedSheet = new CSSStyleSheet();
+        this._adoptedSheet.replaceSync(authorCss);
+      } catch (e) {
+        this._adoptedSheet = null;
+        this._authorCss = authorCss;
+      }
+    }
+
+    _syncThumbHostAttrs(host, cs) {
+      const de = document.documentElement;
+      // setAttribute overwrites but can't delete — an attr removed from
+      // <html> (toggleAttribute off, classList emptied) would linger on
+      // the host and :host([data-*]) / :host(.foo) rules would keep
+      // matching. Remove stale mirrored attrs first; iterate backward
+      // because removeAttribute mutates the live NamedNodeMap.
+      for (let i = host.attributes.length - 1; i >= 0; i--) {
+        const n = host.attributes[i].name;
+        if ((n.startsWith('data-') || n === 'class' || n === 'lang')
+            && !de.hasAttribute(n)) {
+          host.removeAttribute(n);
+        }
+      }
+      for (const a of de.attributes) {
+        if (a.name.startsWith('data-') || a.name === 'class' || a.name === 'lang') {
+          host.setAttribute(a.name, a.value);
+        }
+      }
+      // The :root→:host rewrite in _snapshotAuthorCss pins each custom
+      // property to its stylesheet default on the thumb host, shadowing
+      // the live value that would otherwise inherit. Tweaks can write the
+      // live value on any ancestor — <html>, <body>, a wrapper div, the
+      // deck-stage element — so read it as the *computed* value at
+      // <deck-stage> (which sees the whole inheritance chain) rather than
+      // trying to guess which element the author wrote to. Inline on the
+      // host beats the :host{} rule. remove-stale covers vars dropped
+      // from the stylesheet between snapshots.
+      const vars = this._authorVars || new Set();
+      for (let i = host.style.length - 1; i >= 0; i--) {
+        const p = host.style[i];
+        if (p.startsWith('--') && !vars.has(p)) host.style.removeProperty(p);
+      }
+      const live = cs || getComputedStyle(this);
+      vars.forEach((p) => {
+        const v = live.getPropertyValue(p);
+        if (v) host.style.setProperty(p, v.trim());
+        else host.style.removeProperty(p);
+      });
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('keydown', this._onKey);
+      window.removeEventListener('resize', this._onResize);
+      window.removeEventListener('mousemove', this._onMouseMove);
+      window.removeEventListener('message', this._onMessage);
+      window.removeEventListener('click', this._onDocClick, true);
+      this.removeEventListener('click', this._onTap);
+      if (this._hideTimer) clearTimeout(this._hideTimer);
+      if (this._mouseIdleTimer) clearTimeout(this._mouseIdleTimer);
+      if (this._liveTimer) clearTimeout(this._liveTimer);
+      if (this._tweakTimer) clearTimeout(this._tweakTimer);
+      if (this._railAnimTimer) clearTimeout(this._railAnimTimer);
+      if (this._scaleRaf) cancelAnimationFrame(this._scaleRaf);
+      if (this._liveObserver) this._liveObserver.disconnect();
+      if (this._railObserver) this._railObserver.disconnect();
+      if (this._onTweakChange) window.removeEventListener('tweakchange', this._onTweakChange);
+    }
+
+    attributeChangedCallback() {
+      if (this._canvas) {
+        this._canvas.style.width = this.designWidth + 'px';
+        this._canvas.style.height = this.designHeight + 'px';
+        this._canvas.style.setProperty('--deck-design-w', this.designWidth + 'px');
+        this._canvas.style.setProperty('--deck-design-h', this.designHeight + 'px');
+        if (this._rail) {
+          this._rail.style.setProperty('--deck-aspect', this.designWidth + '/' + this.designHeight);
+        }
+        this._fit();
+        this._scaleThumbs();
+        this._syncPrintPageRule();
+      }
+    }
+
+    _render() {
+      const style = document.createElement('style');
+      style.textContent = stylesheet;
+
+      const stage = document.createElement('div');
+      stage.className = 'stage';
+
+      const canvas = document.createElement('div');
+      canvas.className = 'canvas';
+      canvas.style.width = this.designWidth + 'px';
+      canvas.style.height = this.designHeight + 'px';
+      canvas.style.setProperty('--deck-design-w', this.designWidth + 'px');
+      canvas.style.setProperty('--deck-design-h', this.designHeight + 'px');
+
+      const slot = document.createElement('slot');
+      slot.addEventListener('slotchange', this._onSlotChange);
+      canvas.appendChild(slot);
+      stage.appendChild(canvas);
+
+      // Overlay: compact, solid black, with clickable controls.
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay export-hidden';
+      overlay.setAttribute('role', 'toolbar');
+      overlay.setAttribute('aria-label', 'Deck controls');
+      overlay.setAttribute('data-omelette-chrome', '');
+      overlay.innerHTML = `
+        <button class="btn prev" type="button" aria-label="Previous slide" title="Previous (←)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+        </button>
+        <span class="count" aria-live="polite"><span class="current">1</span><span class="sep">/</span><span class="total">1</span></span>
+        <button class="btn next" type="button" aria-label="Next slide" title="Next (→)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+        </button>
+        <span class="divider"></span>
+        <button class="btn reset" type="button" aria-label="Reset to first slide" title="Reset (R)">Reset<span class="kbd">R</span></button>
+      `;
+
+      overlay.querySelector('.prev').addEventListener('click', () => this._advance(-1, 'click'));
+      overlay.querySelector('.next').addEventListener('click', () => this._advance(1, 'click'));
+      overlay.querySelector('.reset').addEventListener('click', () => this._go(0, 'click'));
+
+      // Thumbnail rail + context menu. Thumbnails are populated in
+      // _renderRail() after _collectSlides().
+      const rail = document.createElement('div');
+      rail.className = 'rail export-hidden';
+      rail.setAttribute('data-omelette-chrome', '');
+      rail.style.setProperty('--deck-aspect', this.designWidth + '/' + this.designHeight);
+      // Edge auto-scroll while dragging a thumb near the rail's top/bottom
+      // so off-screen drop targets are reachable. Native dragover fires
+      // continuously while the pointer is stationary, so a per-event nudge
+      // (ramped by edge proximity) is enough — no rAF loop needed.
+      rail.addEventListener('dragover', (e) => {
+        if (this._dragFrom == null) return;
+        const r = rail.getBoundingClientRect();
+        const EDGE = 40;
+        const dt = e.clientY - r.top;
+        const db = r.bottom - e.clientY;
+        if (dt < EDGE) rail.scrollTop -= Math.ceil((EDGE - dt) / 3);
+        else if (db < EDGE) rail.scrollTop += Math.ceil((EDGE - db) / 3);
+      });
+
+      const menu = document.createElement('div');
+      menu.className = 'ctxmenu export-hidden';
+      menu.setAttribute('data-omelette-chrome', '');
+      menu.innerHTML = `
+        <button type="button" data-act="skip">Skip slide</button>
+        <button type="button" data-act="up">Move up</button>
+        <button type="button" data-act="down">Move down</button>
+        <hr>
+        <button type="button" data-act="delete">Delete slide</button>
+      `;
+      menu.addEventListener('click', (e) => {
+        const act = e.target && e.target.getAttribute && e.target.getAttribute('data-act');
+        if (!act) return;
+        const i = this._menuIndex;
+        this._closeMenu();
+        if (act === 'skip') this._toggleSkip(i);
+        else if (act === 'up') this._moveSlide(i, i - 1);
+        else if (act === 'down') this._moveSlide(i, i + 1);
+        else if (act === 'delete') this._openConfirm(i);
+      });
+      menu.addEventListener('contextmenu', (e) => e.preventDefault());
+
+      // Rail resize handle — drag to set --deck-rail-w, persisted to
+      // localStorage so the width survives reloads.
+      const resize = document.createElement('div');
+      resize.className = 'rail-resize export-hidden';
+      resize.setAttribute('data-omelette-chrome', '');
+      resize.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        resize.setPointerCapture(e.pointerId);
+        resize.setAttribute('data-dragging', '');
+        const move = (ev) => this._setRailWidth(ev.clientX);
+        const up = () => {
+          resize.removeEventListener('pointermove', move);
+          resize.removeEventListener('pointerup', up);
+          resize.removeEventListener('pointercancel', up);
+          resize.removeAttribute('data-dragging');
+          try { localStorage.setItem('deck-stage.railWidth', String(this._railPx)); } catch (err) {}
+        };
+        resize.addEventListener('pointermove', move);
+        resize.addEventListener('pointerup', up);
+        resize.addEventListener('pointercancel', up);
+      });
+
+      // Delete-confirm dialog — mirrors the SPA's ConfirmDialog layout.
+      const confirm = document.createElement('div');
+      confirm.className = 'confirm-backdrop export-hidden';
+      confirm.setAttribute('data-omelette-chrome', '');
+      confirm.innerHTML = `
+        <div class="confirm" role="dialog" aria-modal="true">
+          <div class="body">
+            <div class="title">Delete slide?</div>
+            <div class="msg">This slide will be removed from the deck.</div>
+          </div>
+          <div class="footer">
+            <button type="button" class="cancel">Cancel</button>
+            <button type="button" class="danger">Delete</button>
+          </div>
+        </div>
+      `;
+      confirm.addEventListener('click', (e) => {
+        if (e.target === confirm) this._closeConfirm();
+      });
+      confirm.querySelector('.cancel').addEventListener('click', () => this._closeConfirm());
+      confirm.querySelector('.danger').addEventListener('click', () => {
+        const i = this._confirmIndex;
+        this._closeConfirm();
+        this._deleteSlide(i);
+      });
+
+      this._root.append(style, rail, resize, stage, overlay, menu, confirm);
+      this._canvas = canvas;
+      this._stage = stage;
+      this._slot = slot;
+      this._overlay = overlay;
+      this._rail = rail;
+      this._resize = resize;
+      this._menu = menu;
+      this._confirm = confirm;
+      this._countEl = overlay.querySelector('.current');
+      this._totalEl = overlay.querySelector('.total');
+
+      // Restore persisted rail width.
+      let rw = 188;
+      try {
+        const s = localStorage.getItem('deck-stage.railWidth');
+        if (s) rw = parseInt(s, 10) || rw;
+      } catch (err) {}
+      this._setRailWidth(rw);
+      this._syncRailHidden();
+    }
+
+    _setRailWidth(px) {
+      const w = Math.max(120, Math.min(360, Math.round(px)));
+      this._railPx = w;
+      this.style.setProperty('--deck-rail-w', w + 'px');
+      this._fit();
+      // _scaleThumbs forces a sync layout (frame.offsetWidth) then writes
+      // N transforms. During a resize drag this runs per-pointermove;
+      // coalesce to one per frame.
+      if (!this._scaleRaf) {
+        this._scaleRaf = requestAnimationFrame(() => {
+          this._scaleRaf = null;
+          this._scaleThumbs();
+        });
+      }
+    }
+
+    /** @page must live in the document stylesheet — it's a no-op inside
+     *  shadow DOM. Inject/update a single <head> style tag so the print
+     *  sheet matches the design size and Save-as-PDF yields one slide per
+     *  page with no margins. */
+    _syncPrintPageRule() {
+      const id = 'deck-stage-print-page';
+      let tag = document.getElementById(id);
+      if (!tag) {
+        tag = document.createElement('style');
+        tag.id = id;
+        document.head.appendChild(tag);
+      }
+      tag.textContent =
+        '@page { size: ' + this.designWidth + 'px ' + this.designHeight + 'px; margin: 0; } ' +
+        '@media print { html, body { margin: 0 !important; padding: 0 !important; background: none !important; overflow: visible !important; height: auto !important; } ' +
+        '* { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }';
+    }
+
+    _onSlotChange() {
+      // Rail mutations (delete/move) already reconcile synchronously and
+      // emit slidechange with reason 'api'; skip the async slotchange that
+      // would otherwise re-broadcast with reason 'init'.
+      if (this._squelchSlotChange) { this._squelchSlotChange = false; return; }
+      this._collectSlides();
+      this._restoreIndex();
+      this._applyIndex({ showOverlay: false, broadcast: true, reason: 'init' });
+      this._fit();
+    }
+
+    _collectSlides() {
+      const assigned = this._slot.assignedElements({ flatten: true });
+      this._slides = assigned.filter((el) => {
+        // Skip template/style/script nodes even if someone slots them.
+        const tag = el.tagName;
+        return tag !== 'TEMPLATE' && tag !== 'SCRIPT' && tag !== 'STYLE';
+      });
+      this._slideSet = new Set(this._slides);
+
+      this._slides.forEach((slide, i) => {
+        const n = i + 1;
+        slide.setAttribute('data-screen-label', `${pad2(n)} ${getSlideLabel(slide)}`);
+
+        // Validation attribute for comment flow / auto-checks.
+        if (!slide.hasAttribute('data-om-validate')) {
+          slide.setAttribute('data-om-validate', VALIDATE_ATTR);
+        }
+
+        slide.setAttribute('data-deck-slide', String(i));
+      });
+
+      if (this._totalEl) this._totalEl.textContent = String(this._slides.length || 1);
+      if (this._index >= this._slides.length) this._index = Math.max(0, this._slides.length - 1);
+      this._markLastVisible();
+      this._renderRail();
+    }
+
+    /** Tag the last non-skipped slide so print CSS can drop its
+     *  break-after (see the @media print comment above — :last-child
+     *  alone matches a hidden skipped slide). */
+    _markLastVisible() {
+      let last = null;
+      this._slides.forEach((s) => {
+        s.removeAttribute('data-deck-last-visible');
+        if (!s.hasAttribute('data-deck-skip')) last = s;
+      });
+      if (last) last.setAttribute('data-deck-last-visible', '');
+    }
+
+    _loadNotes() {
+      const tag = document.getElementById('speaker-notes');
+      if (!tag) { this._notes = []; return; }
+      try {
+        const parsed = JSON.parse(tag.textContent || '[]');
+        if (Array.isArray(parsed)) this._notes = parsed;
+      } catch (e) {
+        console.warn('[deck-stage] Failed to parse #speaker-notes JSON:', e);
+        this._notes = [];
+      }
+    }
+
+    _restoreIndex() {
+      // The host's ?slide= param is delivered as a #<int> hash (1-indexed) on
+      // the iframe src. No hash → slide 1; the deck itself keeps no position
+      // state across loads.
+      const h = (location.hash || '').match(/^#(\d+)$/);
+      if (h) {
+        const n = parseInt(h[1], 10) - 1;
+        if (n >= 0 && n < this._slides.length) this._index = n;
+      }
+    }
+
+    _applyIndex({ showOverlay = true, broadcast = true, reason = 'init' } = {}) {
+      if (!this._slides.length) return;
+      const prev = this._prevIndex == null ? -1 : this._prevIndex;
+      const curr = this._index;
+      // Keep the iframe's own hash in sync so an in-iframe location.reload()
+      // (reload banner path in viewer-handle.ts) lands on the current slide,
+      // not the stale deep-link hash from initial load.
+      try { history.replaceState(null, '', '#' + (curr + 1)); } catch (e) {}
+      this._slides.forEach((s, i) => {
+        if (i === curr) s.setAttribute('data-deck-active', '');
+        else s.removeAttribute('data-deck-active');
+      });
+      if (this._countEl) this._countEl.textContent = String(curr + 1);
+      // Follow-scroll on every navigation (init deep-link, keyboard, click,
+      // tap, external goTo) — the only time we *don't* want the rail to
+      // track current is after a rail-internal mutation, where _renderRail
+      // has already restored the user's scroll position and yanking back to
+      // current would undo it.
+      this._syncRail(reason !== 'mutation');
+
+      if (broadcast) {
+        // (1) Legacy: host-window postMessage for speaker-notes renderers.
+        try { window.postMessage({ slideIndexChanged: curr, deckTotal: this._slides.length, deckSkipped: this._skippedIndices() }, '*'); } catch (e) {}
+
+        // (2) In-page CustomEvent on the <deck-stage> element itself.
+        //     Bubbles and composes out of shadow DOM so slide code can listen:
+        //       document.querySelector('deck-stage').addEventListener('slidechange', e => {
+        //         e.detail.index, e.detail.previousIndex, e.detail.total, e.detail.slide, e.detail.reason
+        //       });
+        const detail = {
+          index: curr,
+          previousIndex: prev,
+          total: this._slides.length,
+          slide: this._slides[curr] || null,
+          previousSlide: prev >= 0 ? (this._slides[prev] || null) : null,
+          reason: reason, // 'init' | 'keyboard' | 'click' | 'tap' | 'api'
+        };
+        this.dispatchEvent(new CustomEvent('slidechange', {
+          detail,
+          bubbles: true,
+          composed: true,
+        }));
+      }
+
+      this._prevIndex = curr;
+      if (showOverlay) this._flashOverlay();
+    }
+
+    _flashOverlay() {
+      // Host posts __omelette_presenting while in fullscreen/tab presentation
+      // mode — suppress the nav footer entirely (both hover and slide-change
+      // flash) so the audience sees clean slides.
+      if (!this._overlay || this._presenting) return;
+      this._overlay.setAttribute('data-visible', '');
+      if (this._hideTimer) clearTimeout(this._hideTimer);
+      this._hideTimer = setTimeout(() => {
+        this._overlay.removeAttribute('data-visible');
+      }, OVERLAY_HIDE_MS);
+    }
+
+    _railWidth() {
+      // State-based, no offsetWidth: the first _fit() can run before the
+      // rail has had layout on some load paths, and a 0 there paints the
+      // slide full-width for one frame before the post-slotchange _fit()
+      // corrects it.
+      if (!this._railEnabled || !this._railVisible || this.hasAttribute('no-rail')
+          || this.hasAttribute('noscale') || this._presenting || this._previewMode
+          || NARROW_MQ.matches) return 0;
+      return this._railPx || 0;
+    }
+
+    _fit() {
+      if (!this._canvas) return;
+      const stage = this._canvas.parentElement;
+      // PPTX export sets noscale so the DOM capture sees authored-size
+      // geometry — the scaled canvas is in shadow DOM, so the exporter's
+      // resetTransformSelector can't reach .canvas.style.transform directly.
+      if (this.hasAttribute('noscale')) {
+        this._canvas.style.transform = 'none';
+        if (stage) stage.style.left = '0';
+        if (this._overlay) this._overlay.style.marginLeft = '0';
+        return;
+      }
+      const rw = this._railWidth();
+      if (stage) stage.style.left = rw + 'px';
+      // Overlay is centred on the viewport via left:50% + translate(-50%);
+      // marginLeft shifts the centre by rw/2 so it lands in the middle of
+      // the [rw, innerWidth] stage region.
+      if (this._overlay) this._overlay.style.marginLeft = (rw / 2) + 'px';
+      const vw = window.innerWidth - rw;
+      const vh = window.innerHeight;
+      const s = Math.min(vw / this.designWidth, vh / this.designHeight);
+      this._canvas.style.transform = `scale(${s})`;
+    }
+
+    _onResize() {
+      this._fit();
+      // Crossing the narrow-viewport breakpoint reveals the rail — rerun the
+      // thumbnail scale the same way _setRailWidth does.
+      if (!this._scaleRaf) {
+        this._scaleRaf = requestAnimationFrame(() => {
+          this._scaleRaf = null;
+          this._scaleThumbs();
+        });
+      }
+    }
+
+    _onMouseMove() {
+      // Keep overlay visible while mouse moves; hide after idle.
+      this._flashOverlay();
+    }
+
+    _onMessage(e) {
+      const d = e.data;
+      if (d && typeof d.__omelette_presenting === 'boolean') {
+        this._presenting = d.__omelette_presenting;
+        if (this._presenting && this._overlay) {
+          this._overlay.removeAttribute('data-visible');
+          if (this._hideTimer) clearTimeout(this._hideTimer);
+        }
+        this._syncRailHidden();
+        this._closeMenu();
+        this._closeConfirm();
+        this._fit();
+        this._scaleThumbs();
+      }
+      // Host's Preview segment (ViewerMode='none'): the rail's drag-reorder /
+      // right-click skip-delete affordances are editing chrome, so hide it
+      // while the user is just looking at the deck. Same hard-hide path as
+      // presenting; independent of the user's _railVisible preference so
+      // returning to Edit restores whatever they had.
+      if (d && typeof d.__omelette_preview_mode === 'boolean') {
+        if (d.__omelette_preview_mode === this._previewMode) return;
+        this._previewMode = d.__omelette_preview_mode;
+        this._syncRailHidden();
+        this._closeMenu();
+        this._closeConfirm();
+        this._fit();
+        this._scaleThumbs();
+      }
+      // Per-viewer show/hide, driven by the TweaksPanel's auto-injected
+      // "Thumbnail rail" toggle (or any author script). Independent of
+      // whether the Tweaks panel itself is open — closing the panel
+      // doesn't change rail visibility. Persists alongside rail width.
+      if (d && d.type === '__deck_rail_visible' && typeof d.on === 'boolean') {
+        if (d.on === this._railVisible) return;
+        this._railVisible = d.on;
+        try { localStorage.setItem('deck-stage.railVisible', d.on ? '1' : '0'); } catch (e) {}
+        // Arm the transition, commit it, then flip state — otherwise the
+        // browser coalesces both writes and nothing animates on show.
+        this.setAttribute('data-rail-anim', '');
+        void (this._rail && this._rail.offsetHeight);
+        this._syncRailHidden();
+        this._fit();
+        this._scaleThumbs();
+        clearTimeout(this._railAnimTimer);
+        this._railAnimTimer = setTimeout(() => this.removeAttribute('data-rail-anim'), 220);
+      }
+      if (d && d.type === '__omelette_rail_enabled') this._enableRail();
+    }
+
+    _syncRailHidden() {
+      if (!this._rail) return;
+      // data-presenting is the hard hide (display:none) for flag-off,
+      // presentation mode, and the host's Preview segment — instant, no
+      // transition. data-user-hidden is the soft hide (translateX(-100%))
+      // for the viewer's rail toggle, so show/hide slides under
+      // :host([data-rail-anim]).
+      const hard = !this._railEnabled || this._presenting || this._previewMode;
+      if (hard) this._rail.setAttribute('data-presenting', '');
+      else this._rail.removeAttribute('data-presenting');
+      if (!this._railVisible) this._rail.setAttribute('data-user-hidden', '');
+      else this._rail.removeAttribute('data-user-hidden');
+      // translateX hide leaves thumbs (tabIndex=0) in the tab order —
+      // inert keeps them unfocusable while the rail is off-screen.
+      this._rail.inert = hard || !this._railVisible;
+    }
+
+    _onTap(e) {
+      // Touch-only — keyboard + the overlay toolbar cover nav on desktop.
+      if (FINE_POINTER_MQ.matches) return;
+      // Only taps that land on the stage (slide content or letterbox); the
+      // overlay / rail / menus are siblings with their own click handlers.
+      const path = e.composedPath();
+      if (!this._stage || !path.includes(this._stage)) return;
+      // Let interactive slide content keep the tap. composedPath (not
+      // e.target.closest) so we see through open shadow roots — a <button>
+      // inside a slide-authored custom element retargets e.target to the
+      // host but still appears in the composed path.
+      if (e.defaultPrevented) return;
+      for (const n of path) {
+        if (n === this._stage) break;
+        if (n.matches && n.matches(INTERACTIVE_SEL)) return;
+      }
+      e.preventDefault();
+      const rw = this._railWidth();
+      const mid = rw + (window.innerWidth - rw) / 2;
+      this._advance(e.clientX < mid ? -1 : 1, 'tap');
+    }
+
+    _onKey(e) {
+      // Ignore when the user is typing.
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      // Confirm dialog swallows nav keys while open; Escape cancels. Enter
+      // is left to the focused button's native activation so Tab→Cancel
+      // →Enter activates Cancel, not the window-level confirm path.
+      if (this._confirm && this._confirm.hasAttribute('data-open')) {
+        if (e.key === 'Escape') { this._closeConfirm(); e.preventDefault(); }
+        return;
+      }
+      if (e.key === 'Escape' && this._menu && this._menu.hasAttribute('data-open')) {
+        this._closeMenu();
+        e.preventDefault();
+        return;
+      }
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      const key = e.key;
+      let handled = true;
+
+      if (key === 'ArrowRight' || key === 'PageDown' || key === ' ' || key === 'Spacebar') {
+        this._advance(1, 'keyboard');
+      } else if (key === 'ArrowLeft' || key === 'PageUp') {
+        this._advance(-1, 'keyboard');
+      } else if (key === 'Home') {
+        this._go(0, 'keyboard');
+      } else if (key === 'End') {
+        this._go(this._slides.length - 1, 'keyboard');
+      } else if (key === 'r' || key === 'R') {
+        this._go(0, 'keyboard');
+      } else if (/^[0-9]$/.test(key)) {
+        // 1..9 jump to that slide; 0 jumps to 10.
+        const n = key === '0' ? 9 : parseInt(key, 10) - 1;
+        if (n < this._slides.length) this._go(n, 'keyboard');
+      } else {
+        handled = false;
+      }
+
+      if (handled) {
+        e.preventDefault();
+        this._flashOverlay();
+      }
+    }
+
+    _go(i, reason = 'api') {
+      if (!this._slides.length) return;
+      const clamped = Math.max(0, Math.min(this._slides.length - 1, i));
+      if (clamped === this._index) {
+        this._flashOverlay();
+        return;
+      }
+      this._index = clamped;
+      this._applyIndex({ showOverlay: true, broadcast: true, reason });
+    }
+
+    /** Step forward/back skipping any slide marked data-deck-skip. Falls
+     *  back to _go's clamp-at-ends behaviour (flash overlay) when there's
+     *  nothing further in that direction. */
+    _advance(dir, reason) {
+      if (!this._slides.length) return;
+      let i = this._index + dir;
+      while (i >= 0 && i < this._slides.length && this._slides[i].hasAttribute('data-deck-skip')) {
+        i += dir;
+      }
+      if (i < 0 || i >= this._slides.length) { this._flashOverlay(); return; }
+      this._go(i, reason);
+    }
+
+    // ── Thumbnail rail ────────────────────────────────────────────────────
+    //
+    // Thumbs are keyed by slide element and reused across _renderRail()
+    // calls, so a reorder/delete is an O(changed) DOM shuffle instead of an
+    // O(N) teardown-and-re-clone. Each thumb starts as a lightweight shell
+    // (num + empty frame); the clone is materialized lazily by an
+    // IntersectionObserver when the frame scrolls into (or near) view, so
+    // only visible-ish slides pay the clone + image-decode cost.
+
+    _renderRail() {
+      if (!this._rail || !this._railEnabled) { this._thumbs = []; return; }
+      // FLIP: record each *materialized* thumb's top before the reconcile.
+      // Off-screen (non-materialized) thumbs don't need the animation and
+      // skipping their getBoundingClientRect saves a forced layout per
+      // off-screen thumb on large decks.
+      const prevTops = new Map();
+      (this._thumbs || []).forEach(({ thumb, slide, host }) => {
+        if (host) prevTops.set(slide, thumb.getBoundingClientRect().top);
+      });
+      const st = this._rail.scrollTop;
+
+      // Reconcile: reuse thumbs that already exist for a slide, create
+      // shells for new slides, drop thumbs for removed slides.
+      const bySlide = new Map();
+      (this._thumbs || []).forEach((t) => bySlide.set(t.slide, t));
+      const next = [];
+      this._slides.forEach((slide) => {
+        let t = bySlide.get(slide);
+        if (t) bySlide.delete(slide);
+        else t = this._makeThumb(slide);
+        next.push(t);
+      });
+      // Orphans — slides removed since last render.
+      bySlide.forEach((t) => {
+        if (this._railObserver) this._railObserver.unobserve(t.frame);
+        t.thumb.remove();
+      });
+      // Put thumbs into document order to match _slides. insertBefore on
+      // an already-correctly-placed node is a no-op, so this is cheap
+      // when nothing moved.
+      next.forEach((t, i) => {
+        const want = t.thumb;
+        const at = this._rail.children[i];
+        if (at !== want) this._rail.insertBefore(want, at || null);
+        t.i = i;
+        t.num.textContent = String(i + 1);
+        if (t.slide.hasAttribute('data-deck-skip')) t.thumb.setAttribute('data-skip', '');
+        else t.thumb.removeAttribute('data-skip');
+      });
+      this._thumbs = next;
+
+      this._rail.scrollTop = st;
+      if (prevTops.size) {
+        const moved = [];
+        this._thumbs.forEach(({ thumb, slide }) => {
+          const old = prevTops.get(slide);
+          if (old == null) return;
+          const dy = old - thumb.getBoundingClientRect().top;
+          if (Math.abs(dy) < 1) return;
+          thumb.style.transition = 'none';
+          thumb.style.transform = `translateY(${dy}px)`;
+          moved.push(thumb);
+        });
+        if (moved.length) {
+          // Commit the inverted positions before flipping the transition
+          // on — otherwise the browser coalesces both style writes and
+          // nothing animates.
+          void this._rail.offsetHeight;
+          moved.forEach((t) => {
+            t.style.transition = 'transform 180ms cubic-bezier(.2,.7,.3,1)';
+            t.style.transform = '';
+          });
+          setTimeout(() => moved.forEach((t) => { t.style.transition = ''; }), 220);
+        }
+      }
+      requestAnimationFrame(() => this._scaleThumbs());
+      this._syncRail(false);
+    }
+
+    /** Create a lightweight thumb shell for one slide. The clone is
+     *  materialized later by the IntersectionObserver. Event handlers
+     *  look up the thumb's *current* index (via _thumbs.indexOf) so the
+     *  same element can be reused across reorders. */
+    _makeThumb(slide) {
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb';
+      thumb.tabIndex = 0;
+      const num = document.createElement('div');
+      num.className = 'num';
+      const frame = document.createElement('div');
+      frame.className = 'frame';
+      thumb.append(num, frame);
+
+      const entry = { thumb, num, frame, slide, clone: null, host: null, i: -1 };
+      // entry.i is refreshed on every _renderRail reconcile pass, so
+      // handlers read the thumb's current position without an O(N) scan.
+      const idx = () => entry.i;
+
+      thumb.addEventListener('click', () => this._go(idx(), 'click'));
+      // ↑/↓ step through the rail when a thumb has focus. _go clamps at the
+      // ends and _applyIndex→_syncRail scrolls the new current thumb into
+      // view; we move focus to it (preventScroll — _syncRail already
+      // scrolled) so a held key walks the whole list. stopPropagation keeps
+      // this out of the window-level _onKey nav handler.
+      thumb.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        e.preventDefault();
+        e.stopPropagation();
+        this._go(idx() + (e.key === 'ArrowDown' ? 1 : -1), 'keyboard');
+        const cur = this._thumbs && this._thumbs[this._index];
+        if (cur) cur.thumb.focus({ preventScroll: true });
+      });
+      thumb.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        this._openMenu(idx(), e.clientX, e.clientY);
+      });
+      thumb.draggable = true;
+      thumb.addEventListener('dragstart', (e) => {
+        this._dragFrom = idx();
+        thumb.setAttribute('data-dragging', '');
+        e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', String(this._dragFrom)); } catch (err) {}
+      });
+      thumb.addEventListener('dragend', () => {
+        thumb.removeAttribute('data-dragging');
+        this._clearDrop();
+        this._dragFrom = null;
+      });
+      thumb.addEventListener('dragover', (e) => {
+        if (this._dragFrom == null) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const r = thumb.getBoundingClientRect();
+        this._setDrop(idx(), e.clientY < r.top + r.height / 2 ? 'before' : 'after');
+      });
+      thumb.addEventListener('drop', (e) => {
+        if (this._dragFrom == null) return;
+        e.preventDefault();
+        const i = idx();
+        const r = thumb.getBoundingClientRect();
+        let to = e.clientY >= r.top + r.height / 2 ? i + 1 : i;
+        if (this._dragFrom < to) to--;
+        const from = this._dragFrom;
+        this._clearDrop();
+        this._dragFrom = null;
+        if (to !== from) this._moveSlide(from, to);
+      });
+
+      if (this._railObserver) this._railObserver.observe(frame);
+      frame.__deckThumb = entry;
+      return entry;
+    }
+
+    /** Lazily build the clone for a thumb that has scrolled into view. */
+    _materialize(entry) {
+      if (entry.host) return;
+      const dw = this.designWidth, dh = this.designHeight;
+      let clone = entry.slide.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.removeAttribute('data-deck-active');
+      clone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+      // Neuter heavy media; replace <video> with its poster so the box
+      // keeps a visual. <iframe>/<audio> become empty placeholders.
+      clone.querySelectorAll('iframe, audio, object, embed').forEach((el) => {
+        el.removeAttribute('src');
+        el.removeAttribute('srcdoc');
+        el.removeAttribute('data');
+        el.innerHTML = '';
+      });
+      clone.querySelectorAll('video').forEach((el) => {
+        if (!el.poster) { el.removeAttribute('src'); el.innerHTML = ''; return; }
+        const img = document.createElement('img');
+        img.src = el.poster;
+        img.alt = '';
+        img.style.cssText = el.style.cssText + ';object-fit:cover;width:100%;height:100%;';
+        img.className = el.className;
+        el.replaceWith(img);
+      });
+      // Images: defer decode and let the browser pick the smallest
+      // srcset candidate for the ~140px thumb. Same-URL clones reuse the
+      // slide's decoded bitmap (URL-keyed cache), so the remaining cost
+      // is paint/composite — lazy+async keeps that off the main thread.
+      clone.querySelectorAll('img').forEach((el) => {
+        el.loading = 'lazy';
+        el.decoding = 'async';
+        if (el.srcset) el.sizes = (this._railPx || 188) + 'px';
+      });
+      // Custom elements inside the slide would have their
+      // connectedCallback fire when the clone is appended. Replace them
+      // with inert boxes so a component-heavy deck doesn't run N copies
+      // of each component's mount logic in the rail. Children are
+      // preserved so layout-wrapper elements (<my-column><h2>…</h2>)
+      // still show their authored content; the querySelectorAll NodeList
+      // is static, so nested custom elements in the moved subtree are
+      // still visited on later iterations.
+      const neuter = (el) => {
+        const box = document.createElement('div');
+        box.style.cssText = (el.getAttribute('style') || '') +
+          ';background:rgba(0,0,0,0.06);border:1px dashed rgba(0,0,0,0.15);';
+        box.className = el.className;
+        // Preserve theming/i18n hooks so [data-*] / :lang() / [dir]
+        // descendant selectors still match the neutered root.
+        for (const a of el.attributes) {
+          const n = a.name;
+          if (n.startsWith('data-') || n.startsWith('aria-') ||
+              n === 'lang' || n === 'dir' || n === 'role' || n === 'title') {
+            box.setAttribute(n, a.value);
+          }
+        }
+        while (el.firstChild) box.appendChild(el.firstChild);
+        return box;
+      };
+      // querySelectorAll('*') returns descendants only — a custom-element
+      // slide root (<my-slide>…</my-slide>) would slip through and upgrade
+      // on append. Swap the root first.
+      if (clone.tagName.includes('-')) clone = neuter(clone);
+      clone.querySelectorAll('*').forEach((el) => {
+        if (el.tagName.includes('-')) el.replaceWith(neuter(el));
+      });
+      clone.style.cssText += ';position:absolute;top:0;left:0;transform-origin:0 0;' +
+        'pointer-events:none;width:' + dw + 'px;height:' + dh + 'px;' +
+        'box-sizing:border-box;overflow:hidden;visibility:visible;opacity:1;';
+      const host = document.createElement('div');
+      host.style.cssText = 'position:absolute;inset:0;';
+      this._syncThumbHostAttrs(host);
+      const sr = host.attachShadow({ mode: 'open' });
+      if (this._adoptedSheet) sr.adoptedStyleSheets = [this._adoptedSheet];
+      else {
+        const st = document.createElement('style');
+        st.textContent = this._authorCss || '';
+        sr.appendChild(st);
+      }
+      sr.appendChild(clone);
+      entry.frame.appendChild(host);
+      entry.host = host;
+      entry.clone = clone;
+      if (this._thumbScale) clone.style.transform = 'scale(' + this._thumbScale + ')';
+      // Once materialized the IO callback is a no-op early-return —
+      // unobserve so scroll doesn't keep firing it.
+      if (this._railObserver) this._railObserver.unobserve(entry.frame);
+    }
+
+    /** Re-clone a single thumb (live-update path). No-op if the thumb
+     *  hasn't been materialized yet — it'll pick up current content when
+     *  it scrolls into view. */
+    _refreshThumb(slide) {
+      const entry = (this._thumbs || []).find((t) => t.slide === slide);
+      if (!entry || !entry.host) return;
+      entry.host.remove();
+      entry.host = entry.clone = null;
+      this._materialize(entry);
+    }
+
+    _scaleThumbs() {
+      if (!this._thumbs || !this._thumbs.length) return;
+      // Every frame is the same width; if it reads 0 the rail is
+      // display:none (noscale / no-rail / presenting / print) — leave the
+      // clones as-is and re-run when the rail is revealed.
+      const fw = this._thumbs[0].frame.offsetWidth;
+      if (!fw) return;
+      this._thumbScale = fw / this.designWidth;
+      this._thumbs.forEach(({ clone }) => {
+        if (clone) clone.style.transform = 'scale(' + this._thumbScale + ')';
+      });
+    }
+
+    _setDrop(i, where) {
+      // dragover fires at pointer-event rate; touch only the previous
+      // and new target rather than sweeping all N thumbs.
+      const t = this._thumbs && this._thumbs[i];
+      if (this._dropOn && this._dropOn !== t) {
+        this._dropOn.thumb.removeAttribute('data-drop');
+      }
+      if (t) t.thumb.setAttribute('data-drop', where);
+      this._dropOn = t || null;
+    }
+
+    _clearDrop() {
+      if (this._dropOn) this._dropOn.thumb.removeAttribute('data-drop');
+      this._dropOn = null;
+    }
+
+    _syncRail(follow) {
+      if (!this._thumbs) return;
+      this._thumbs.forEach(({ thumb }, i) => {
+        if (i === this._index) {
+          thumb.setAttribute('data-current', '');
+          if (follow && typeof thumb.scrollIntoView === 'function') {
+            thumb.scrollIntoView({ block: 'nearest' });
+          }
+        } else {
+          thumb.removeAttribute('data-current');
+        }
+      });
+    }
+
+    _openMenu(i, x, y) {
+      if (!this._menu) return;
+      this._menuIndex = i;
+      const slide = this._slides[i];
+      const skip = slide && slide.hasAttribute('data-deck-skip');
+      this._menu.querySelector('[data-act="skip"]').textContent = skip ? 'Unskip slide' : 'Skip slide';
+      this._menu.querySelector('[data-act="up"]').disabled = i <= 0;
+      this._menu.querySelector('[data-act="down"]').disabled = i >= this._slides.length - 1;
+      this._menu.querySelector('[data-act="delete"]').disabled = this._slides.length <= 1;
+      // Place, then clamp to viewport after it's measurable.
+      this._menu.style.left = x + 'px';
+      this._menu.style.top = y + 'px';
+      this._menu.setAttribute('data-open', '');
+      const r = this._menu.getBoundingClientRect();
+      const nx = Math.min(x, window.innerWidth - r.width - 4);
+      const ny = Math.min(y, window.innerHeight - r.height - 4);
+      this._menu.style.left = Math.max(4, nx) + 'px';
+      this._menu.style.top = Math.max(4, ny) + 'px';
+    }
+
+    _closeMenu() {
+      if (this._menu) this._menu.removeAttribute('data-open');
+      this._menuIndex = -1;
+    }
+
+    _openConfirm(i) {
+      if (!this._confirm) return;
+      this._confirmIndex = i;
+      this._confirm.querySelector('.title').textContent = 'Delete slide ' + (i + 1) + '?';
+      this._confirm.setAttribute('data-open', '');
+      const btn = this._confirm.querySelector('.danger');
+      if (btn && btn.focus) btn.focus();
+    }
+
+    _closeConfirm() {
+      if (this._confirm) this._confirm.removeAttribute('data-open');
+      this._confirmIndex = -1;
+    }
+
+    _emitDeckChange(detail) {
+      this.dispatchEvent(new CustomEvent('deckchange', {
+        detail, bubbles: true, composed: true,
+      }));
+    }
+
+    _deleteSlide(i) {
+      const slide = this._slides[i];
+      if (!slide || this._slides.length <= 1) return;
+      const wasCurrent = i === this._index;
+      if (i < this._index || (wasCurrent && i === this._slides.length - 1)) this._index--;
+      this._squelchSlotChange = true;
+      slide.remove();
+      this._emitDeckChange({ action: 'delete', from: i, slide });
+      this._collectSlides();
+      this._applyIndex({ showOverlay: true, broadcast: true, reason: 'mutation' });
+    }
+
+    _toggleSkip(i) {
+      const slide = this._slides[i];
+      if (!slide) return;
+      const on = !slide.hasAttribute('data-deck-skip');
+      if (on) slide.setAttribute('data-deck-skip', '');
+      else slide.removeAttribute('data-deck-skip');
+      if (this._thumbs && this._thumbs[i]) {
+        if (on) this._thumbs[i].thumb.setAttribute('data-skip', '');
+        else this._thumbs[i].thumb.removeAttribute('data-skip');
+      }
+      this._markLastVisible();
+      this._emitDeckChange({ action: on ? 'skip' : 'unskip', from: i, slide });
+      // Re-broadcast so the presenter popup's prev/next thumbnails re-pick
+      // the nearest non-skipped slide without waiting for a nav event.
+      try { window.postMessage({ slideIndexChanged: this._index, deckTotal: this._slides.length, deckSkipped: this._skippedIndices() }, '*'); } catch (e) {}
+    }
+
+    _skippedIndices() {
+      const out = [];
+      for (let i = 0; i < this._slides.length; i++) {
+        if (this._slides[i].hasAttribute('data-deck-skip')) out.push(i);
+      }
+      return out;
+    }
+
+    _moveSlide(i, j) {
+      if (j < 0 || j >= this._slides.length || j === i) return;
+      const slide = this._slides[i];
+      const ref = j < i ? this._slides[j] : this._slides[j].nextSibling;
+      // Track the active slide across the reorder so the same content
+      // stays on screen.
+      const cur = this._index;
+      if (cur === i) this._index = j;
+      else if (i < cur && j >= cur) this._index = cur - 1;
+      else if (i > cur && j <= cur) this._index = cur + 1;
+      this._squelchSlotChange = true;
+      this.insertBefore(slide, ref);
+      this._emitDeckChange({ action: 'move', from: i, to: j, slide });
+      this._collectSlides();
+      this._applyIndex({ showOverlay: false, broadcast: true, reason: 'mutation' });
+    }
+
+    // Public API ------------------------------------------------------------
+
+    /** Current slide index (0-based). */
+    get index() { return this._index; }
+    /** Total slide count. */
+    get length() { return this._slides.length; }
+    /** Programmatically navigate. */
+    goTo(i) { this._go(i, 'api'); }
+    next() { this._advance(1, 'api'); }
+    prev() { this._advance(-1, 'api'); }
+    reset() { this._go(0, 'api'); }
+  }
+
+  if (!customElements.get('deck-stage')) {
+    customElements.define('deck-stage', DeckStage);
+  }
+})();
+
+</script>
+</body>
+</html>
